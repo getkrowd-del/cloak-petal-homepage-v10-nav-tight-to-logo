@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://getkrowd-del.github.io/cloak-petal-homepage-v10-nav-tight-to-logo/sitemap.xml
