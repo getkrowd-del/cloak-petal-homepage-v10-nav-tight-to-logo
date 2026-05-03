@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- BASE:START (managed by Coding Agent — do not edit) -->
+<base href="/cloak-petal-homepage-v10-nav-tight-to-logo/">
+<!-- BASE:END -->
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+
+
+<!-- SEO Meta Tags -->
+<title>Cloak &amp; Petal | Little Italy San Diego</title>
+<meta property="og:title" content="Cloak &amp; Petal | Little Italy San Diego" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Cloak &amp; Petal | Little Italy San Diego" />
+<!-- End SEO Meta Tags -->
+
+<script data-field-replace>
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var fields={};
+  var paramMap={
+    'first_name':'firstName','last_name':'lastName','full_name':'fullName',
+    'email':'email','phone':'phone','company':'company',
+    'city':'city','state':'state','country':'country'
+  };
+  var skipTags={'SCRIPT':1,'STYLE':1,'NOSCRIPT':1,'TEXTAREA':1,'CODE':1,'PRE':1};
+  var hasUrlFields=false;
+  for(var p in paramMap){
+    var v=params.get(p);
+    if(v){fields[paramMap[p]]=v;hasUrlFields=true;}
+  }
+  var contactId=params.get('contact_id');
+  function esc(s){
+    if(!s)return s;
+    var d=document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+  function doReplace(data){
+    var r={};
+    r['{{full_name}}']=esc(((data.firstName||'')+' '+(data.lastName||'')).trim()||((data.fullName||data.name)||''));
+    r['{{first_name}}']=esc(data.firstName||(data.name?data.name.split(' ')[0]:'')||'');
+    r['{{last_name}}']=esc(data.lastName||(data.name&&data.name.indexOf(' ')>-1?data.name.substring(data.name.indexOf(' ')+1):'')||'');
+    r['{{email}}']=esc(data.email||'');
+    r['{{phone}}']=esc(data.phone||'');
+    r['{{company}}']=esc(data.company||'');
+    r['{{city}}']=esc(data.city||'');
+    r['{{state}}']=esc(data.state||'');
+    r['{{country}}']=esc(data.country||'');
+    r['{{date}}']=new Date().toLocaleDateString();
+    r['{{time}}']=new Date().toLocaleTimeString();
+    r['{{location}}']=[data.city,data.state,data.country].filter(Boolean).join(', ');
+    r['{{tracking_id}}']=esc(data.trackingId||'');
+    r['{{lastClickedProduct}}']=esc(data.lastClickedProduct||'');
+    r['{{lastProductClickDate}}']=esc(data.lastProductClickDate||'');
+    r['{{lastClickedProductPrice}}']=esc(data.lastClickedProductPrice||'');
+    r['{{lastClickedProductURL}}']=esc(data.lastClickedProductURL||'');
+    r['{{productsClickedCount}}']=esc(data.productsClickedCount||'0');
+    r['{{ip_address}}']=esc(data.ipAddress||'');
+    r['{{ip}}']=esc(data.ipAddress||'');
+    if(data.customFields){
+      for(var k in data.customFields){
+        r['{{'+k+'}}']=esc(String(data.customFields[k]||''));
+      }
+    }
+    params.forEach(function(v,k){
+      if(!paramMap[k]&&k!=='contact_id'&&k!=='page_id'&&k.indexOf('utm_')!==0){
+        r['{{'+k+'}}']=esc(v);
+      }
+    });
+    var hasValues=false;
+    for(var key in r){if(r[key]){hasValues=true;break;}}
+    if(!hasValues)return;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(n){
+        var p=n.parentNode;
+        if(p&&skipTags[p.nodeName])return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var node;
+    while(node=walker.nextNode()){
+      var txt=node.nodeValue;
+      if(txt&&txt.indexOf('{{')>-1){
+        var changed=txt;
+        for(var ph in r){
+          if(r[ph]&&changed.indexOf(ph)>-1){
+            changed=changed.split(ph).join(r[ph]);
+          }
+        }
+        if(changed!==txt)node.nodeValue=changed;
+      }
+    }
+    var attrs=['value','placeholder','content','alt','title'];
+    attrs.forEach(function(attr){
+      var els=document.querySelectorAll('['+attr+'*="{{"]');
+      for(var i=0;i<els.length;i++){
+        var tag=els[i].tagName;
+        if(skipTags[tag])continue;
+        var val=els[i].getAttribute(attr);
+        if(val){
+          var nv=val;
+          for(var ph in r){
+            if(r[ph]&&nv.indexOf(ph)>-1){
+              nv=nv.split(ph).join(r[ph]);
+            }
+          }
+          if(nv!==val)els[i].setAttribute(attr,nv);
+        }
+      }
+    });
+  }
+  function run(){
+    if(contactId){
+      var xhr=new XMLHttpRequest();
+      xhr.open('GET','https://paymegpt.com/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=3725');
+      xhr.onload=function(){
+        if(xhr.status===200){
+          try{
+            var resp=JSON.parse(xhr.responseText);
+            if(resp.success&&resp.contact){
+              var merged=resp.contact;
+              for(var k in fields){merged[k]=fields[k];}
+              doReplace(merged);
+              return;
+            }
+          }catch(e){}
+        }
+        if(hasUrlFields)doReplace(fields);
+      };
+      xhr.onerror=function(){if(hasUrlFields)doReplace(fields);};
+      xhr.send();
+    }else if(hasUrlFields){
+      doReplace(fields);
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}
+  else{run();}
+})();
+</script>
+<script data-payment>
+(function(){
+  var slug='NThxxqWSzx';
+  var apiBase='https://paymegpt.com';
+  function findEmail(){
+    var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
+    var inputs=document.querySelectorAll('input[type="email"],input[name*="email"],input[placeholder*="email"],input[placeholder*="Email"]');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.includes('@'))return inputs[j].value.trim();}
+    return '';
+  }
+  function findName(){
+    var ids=['name','fullName','full-name','buyer-name','buyerName','customer-name','userName','user-name'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value)return el.value.trim();}
+    var inputs=document.querySelectorAll('input[name*="name"]:not([name*="email"]):not([type="email"]),input[placeholder*="name"]:not([placeholder*="email"]):not([type="email"]),input[placeholder*="Name"]:not([type="email"])');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value)return inputs[j].value.trim();}
+    return '';
+  }
+  var __realProcessPayment=function(a,b,c,d,e){
+    var amountCents,email,productName,productDescription,customerName,quantity;
+    if(a&&typeof a==='object'){
+      amountCents=a.amountCents;email=a.email;productName=a.productName;
+      productDescription=a.productDescription||'';customerName=a.name||'';quantity=a.quantity||1;
+    }else{
+      amountCents=typeof a==='number'?a:0;productName=typeof b==='string'?b:'';
+      productDescription=typeof c==='string'?c:'';email='';customerName='';quantity=1;
+    }
+    if(!email)email=findEmail();
+    if(!customerName)customerName=findName();
+    if(!productName){alert('Product name is required.');return Promise.reject('no_product_name');}
+    if(!amountCents||amountCents<100){alert('Amount must be at least $1.00');return Promise.reject('invalid_amount');}
+    if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
+    var successBase=window.location.href.split('?')[0];
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/payment/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,name:customerName,amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process payment');throw new Error(d.error);}
+    });
+  };
+  Object.defineProperty(window,'__processPayment',{value:__realProcessPayment,writable:false,configurable:false});
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('payment')==='success'){
+      var pName=urlParams.get('product')||'your item';
+      var overlay=document.createElement('div');overlay.id='payment-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">Thank you for purchasing '+pName.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'.</p><button onclick="document.getElementById(\'payment-success-overlay\').remove();window.history.replaceState({},\'\',window.location.pathname);" style="padding:12px 32px;font-size:16px;font-weight:600;background:#16a34a;color:white;border:none;border-radius:8px;cursor:pointer;">Continue</button></div>';
+      document.body.appendChild(overlay);
+    }
+  });
+})();
+</script>  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="nav-wrapper" id="navWrapper">
+
+  <!-- TOP BAR -->
+  <div class="nav-top">
+    <div class="nav-top-social">
+      <a href="https://www.facebook.com/CloakAndPetal/" target="_blank" title="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://twitter.com/CloakAndPetal" target="_blank" title="Twitter"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+      <a href="https://www.instagram.com/cloakandpetal/" target="_blank" title="Instagram"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    </div>
+    <div class="nav-top-divider"></div>
+    <div class="nav-top-info">
+      <a href="https://maps.google.com/?q=1953+India+St+San+Diego+CA" target="_blank">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="#080608"/></svg>
+        1953 India St. Little Italy, San Diego 92101
+      </a>
+      <a href="tel:6195015505">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call Us: (619) 501-5505
+      </a>
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR — logo in flow, groups hug it at 22px -->
+  <div class="nav-bottom">
+
+    <!-- LEFT GROUP -->
+    <ul class="nav-group">
+      <li class="nav-item"><a href="#" class="active">Home</a></li>
+      <li class="nav-item">
+        <a href="#">About <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="https://cloakandpetal.com/about-us-2/" target="_blank">About Us</a>
+          <a href="https://paymegpt.com/p/Ax9QZW" target="_blank">Press &amp; Awards ⭐</a>
+          <a href="https://cloakandpetal.com/contact-cloak-and-petal/" target="_blank">Contact Us</a>
+          <a href="https://cloakandpetal.com/pages/reservations-little-italy-san-diego/" target="_blank">Reservations</a>
+          <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#">Parties <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank">Reserve 12 Guests or Less</a>
+          <a href="https://www.toasttab.com/invoice/lead?rx=b9a10cf8-40c8-4b88-a300-3cd2ee5a73e3" target="_blank">Reserve 13+ Guests</a>
+        </div>
+      </li>
+    </ul>
+
+    <!-- LOGO — sits in flow, 22px margin each side -->
+    <a href="#" class="nav-logo-wrap">
+      <img src="https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png" alt="Cloak & Petal Little Italy">
+    </a>
+
+    <!-- RIGHT GROUP -->
+    <ul class="nav-group">
+      <li class="nav-item">
+        <a href="#">Menus <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine In Menus</a>
+          <a href="https://cloakandpetal.com/happy-hour/" target="_blank">Happy Hour</a>
+          <a href="https://cloakandpetal.com/food-menus/spirit-list/" target="_blank">Spirit List</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order</a></li>
+      <li class="nav-item"><a href="https://www.toasttab.com/catering/cloak-and-petal-1953-india-st" target="_blank">Sushi Platters To Go</a></li>
+      <li class="nav-item"><a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="nav-reserve-btn">Reservations</a></li>
+    </ul>
+
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#">Home</a>
+  <div class="mob-section">About</div>
+  <a href="https://cloakandpetal.com/about-us-2/" target="_blank">About Us</a>
+  <a href="https://paymegpt.com/p/Ax9QZW" target="_blank">Press &amp; Awards ⭐</a>
+  <a href="https://cloakandpetal.com/contact-cloak-and-petal/" target="_blank">Contact Us</a>
+  <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
+  <div class="mob-section">Parties</div>
+  <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank">Reserve 12 Guests or Less</a>
+  <a href="https://www.toasttab.com/invoice/lead?rx=b9a10cf8-40c8-4b88-a300-3cd2ee5a73e3" target="_blank">Reserve 13+ Guests</a>
+  <div class="mob-section">Menus</div>
+  <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine In Menus</a>
+  <a href="https://cloakandpetal.com/happy-hour/" target="_blank">Happy Hour</a>
+  <a href="https://cloakandpetal.com/food-menus/spirit-list/" target="_blank">Spirit List</a>
+  <div class="mob-section">More</div>
+  <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order Online</a>
+  <a href="https://www.toasttab.com/catering/cloak-and-petal-1953-india-st" target="_blank">Sushi Platters To Go</a>
+  <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="mob-reserve">Reservations</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://cloakandpetal.com/wp-content/uploads/2025/12/CP-Brand-Vid-25.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Little Italy · San Diego</p>
+    <h1 class="hero-title">Cloak<br><span>&amp;</span> Petal</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-subtitle">Authentic Japanese Sushi · Whiskey &amp; Sake Bar</p>
+    <div class="hero-ctas">
+      <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="btn-primary">Reserve a Table</a>
+      <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank" class="btn-ghost">Order Online</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>Discover</span></div>
+</section>
+
+<!-- AWARDS STRIP -->
+<div class="awards-strip">
+  <div class="award-badge"><span class="icon">⭐</span><div><strong>MICHELIN Guide</strong>Recognized Restaurant</div></div>
+  <div class="awards-div"></div>
+  <div class="award-badge"><span class="icon">🥇</span><div><strong>Gold Medallion 2022</strong>Best Asian Restaurant, CA</div></div>
+  <div class="awards-div"></div>
+  <div class="award-badge"><span class="icon">🏆</span><div><strong>Best Appetizer 2025</strong>Uptown/Downtown Best Of</div></div>
+  <div class="awards-div"></div>
+  <a href="https://paymegpt.com/p/Ax9QZW" target="_blank" class="awards-cta">View All Awards →</a>
+</div>
+
+<!-- GC BANNER -->
+<div class="gc-banner">
+  <p>The gift that says everything — <em>Cloak &amp; Petal Gift Cards</em>, always the right choice.</p>
+  <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards?utmCampaign=onlineOrdering" target="_blank" class="btn-primary">Gift Cards</a>
+</div>
+
+<!-- INTRO -->
+<section class="intro" id="about">
+  <div class="intro-text">
+    <span class="section-label">Come Unwind Your Soul</span>
+    <h2 class="section-title">Beneath the Levels of <span class="accent">Ordinary Life</span></h2>
+    <p class="intro-body">Journey into a place of both intimacy and companionship, where family and friends gather beneath blooming cherry blossoms to savor sushi, craft cocktails, and fellowship. A sanctuary carved from the heart of Little Italy.</p>
+    <a href="https://cloakandpetal.com/about-us-2/" class="btn-ghost" style="max-width:200px;width:auto;padding:14px 28px;">Our Story</a>
+  </div>
+  <div class="intro-images">
+    <div class="img-stack img-a"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/255403570_3037318236539895_1577337030238411525_n.jpg" alt="sushi" loading="lazy"></div>
+    <div class="img-stack img-b"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/274520904_3111194449152273_5820460524276034975_n.jpg" alt="interior" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="menus">
+  <span class="section-label">An Experience You're Sure to Remember</span>
+  <h2 class="section-title">Formal Dining. <span class="accent">Effortless Atmosphere.</span></h2>
+  <p class="section-body">Feast on authentic Japanese sushi, small plates, and elevated drinks in spaces thoughtfully created for every occasion.</p>
+  <div class="features">
+    <div class="feature-card"><span class="feature-number">01</span><h3>Omakase Sushi</h3><p>Freshly crafted traditional and contemporary Japanese sushi, nigiri, and sashimi — each plate a work of art.</p></div>
+    <div class="feature-card"><span class="feature-number">02</span><h3>Whiskey & Sake Bar</h3><p>A curated Japanese whiskey and sake collection alongside handcrafted cocktails that transport you to Tokyo.</p></div>
+    <div class="feature-card"><span class="feature-number">03</span><h3>Private Events</h3><p>Intimate gatherings to grand celebrations — our team crafts unforgettable experiences for every group size.</p></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery-strip">
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/254164674_3038790869725965_4100971500022566362_n-2.jpg" alt="" loading="lazy"></div>
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/262793360_3052942178310834_7517131027030412740_n-2.jpg" alt="" loading="lazy"></div>
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/269820213_3069137243357994_519417019807868091_n-2.jpg" alt="" loading="lazy"></div>
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/271355861_3081550932116625_7675483469406211570_n-2.jpg" alt="" loading="lazy"></div>
+</div>
+
+<!-- SHIBUYA -->
+<section class="shibuya" id="shibuya">
+  <div class="shibuya-visual">
+    <div class="shibuya-logo"><img src="https://cloakandpetal.com/wp-content/uploads/2022/05/shibuya-scaled-1-300x93.jpg" alt="Shibuya Nights"></div>
+    <div class="shibuya-photos">
+      <img src="https://cloakandpetal.com/wp-content/uploads/2022/05/IMG_6303-scaled-1.jpg" alt="" loading="lazy">
+      <img src="https://cloakandpetal.com/wp-content/uploads/2022/05/IMG_6304-scaled-1.jpg" alt="" loading="lazy">
+      <img src="https://cloakandpetal.com/wp-content/uploads/2022/05/IMG_6490-scaled-1.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+  <div class="shibuya-text">
+    <span class="section-label">Now Open Inside Cloak & Petal</span>
+    <h2 class="section-title">Shibuya <span style="color:var(--rose)">Nights</span></h2>
+    <p>Step into our newest creation — a Tokyo-drift cocktail experience nestled inside Cloak &amp; Petal. Shibuya Nights takes you on a sensory journey through neon-lit Japan, one carefully crafted pour at a time.</p>
+    <p>Featured in Eater San Diego as one of the city's most immersive bar experiences.</p>
+    <a href="https://sandiego.eater.com/2022/5/26/23142940/cloak-petal-shibuya-nights-japanese-cocktail-bar-restaurant-little-italy-san-diego" target="_blank" class="link-text">Read the Eater San Diego Feature →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-section">
+  <div class="footer-block">
+    <h4>Hours</h4>
+    <div class="hours-grid">
+      <div><div class="hours-day">Mon – Tues</div><div class="hours-time">4pm – 11pm</div></div>
+      <div><div class="hours-day">Wed – Thurs</div><div class="hours-time">4pm – 11pm</div></div>
+      <div><div class="hours-day">Friday</div><div class="hours-time">4pm – 12am</div></div>
+      <div><div class="hours-day">Saturday</div><div class="hours-time">4pm – 12am</div></div>
+      <div><div class="hours-day">Sunday</div><div class="hours-time">4pm – 11pm</div></div>
+    </div>
+  </div>
+  <div class="footer-block footer-middle">
+    <img class="footer-logo-img" src="https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png" alt="Cloak & Petal">
+    <p class="footer-address">1953 India St<br>Little Italy, San Diego 92101</p>
+    <a href="tel:6195015505" class="footer-phone">(619) 501-5505</a>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/CloakAndPetal/" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://twitter.com/CloakAndPetal" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+      <a href="https://www.instagram.com/cloakandpetal/" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://www.yelp.com/biz/cloak-and-petal-san-diego" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer-block">
+    <h4>Quick Links</h4>
+    <div class="footer-ctas">
+      <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="cta-primary">Make a Reservation</a>
+      <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order Online</a>
+      <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine-In Menu</a>
+      <a href="https://cloakandpetal.com/happy-hour/" target="_blank">Happy Hour</a>
+      <a href="https://paymegpt.com/p/Ax9QZW" target="_blank">Press &amp; Awards ⭐</a>
+      <a href="https://www.toasttab.com/catering/cloak-and-petal-1953-india-st" target="_blank">Sushi Platters To Go</a>
+      <a href="https://cloakandpetal.com/private-events-san-diego-little-italy/" target="_blank">Private Events</a>
+      <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
+    </div>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Cloak and Petal. All rights reserved.</p>
+  <p><a href="https://cloakandpetal.com/statement-of-ada-compliance/">ADA Compliance</a></p>
+</div>
+
+<!-- VIP -->
+<div id="vip-callout">
+  <button class="vip-close" onclick="closeVip()">✕</button>
+  <div class="vip-emoji">🌸</div>
+  <div class="vip-text"><p>Welcome! Join or access our <strong>Cloak VIP</strong> club here, or ask me anything!</p></div>
+</div>
+
+<!-- CHAT -->
+<div id="cp-chat-bubble" onclick="openChat()"><img src="https://images.getkrowd.com/images/cloackIcon.png" alt="Chat"></div>
+<div id="cp-chat-frame"><iframe id="cp-chat-iframe" src="" allow="microphone"></iframe></div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
