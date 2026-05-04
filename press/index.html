@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+
+
+<!-- SEO Meta Tags -->
+<title>Press &amp; Awards | Cloak &amp; Petal Little Italy San Diego</title>
+<meta name="description" content="Cloak &amp; Petal is a MICHELIN Guide recognized restaurant in Little Italy, San Diego. Winner of Best Asian Restaurant 2022, Best Appetizer 2025, and featured in Eater San Diego, San Diego Magazine, CBS 8, Fox 5 and more." />
+<meta property="og:title" content="Press &amp; Awards | Cloak &amp; Petal Little Italy San Diego" />
+<meta property="og:description" content="Cloak &amp; Petal is a MICHELIN Guide recognized restaurant in Little Italy, San Diego. Winner of Best Asian Restaurant 2022, Best Appetizer 2025, and featured in Eater San Diego, San Diego Magazine, CBS 8, Fox 5 and more." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Press &amp; Awards | Cloak &amp; Petal Little Italy San Diego" />
+<meta name="twitter:description" content="Cloak &amp; Petal is a MICHELIN Guide recognized restaurant in Little Italy, San Diego. Winner of Best Asian Restaurant 2022, Best Appetizer 2025, and featured in Eater San Diego, San Diego Magazine, CBS 8, Fox 5 and more." />
+<!-- End SEO Meta Tags -->
+
+<script data-field-replace>
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var fields={};
+  var paramMap={
+    'first_name':'firstName','last_name':'lastName','full_name':'fullName',
+    'email':'email','phone':'phone','company':'company',
+    'city':'city','state':'state','country':'country'
+  };
+  var skipTags={'SCRIPT':1,'STYLE':1,'NOSCRIPT':1,'TEXTAREA':1,'CODE':1,'PRE':1};
+  var hasUrlFields=false;
+  for(var p in paramMap){
+    var v=params.get(p);
+    if(v){fields[paramMap[p]]=v;hasUrlFields=true;}
+  }
+  var contactId=params.get('contact_id');
+  function esc(s){
+    if(!s)return s;
+    var d=document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+  function doReplace(data){
+    var r={};
+    r['{{full_name}}']=esc(((data.firstName||'')+' '+(data.lastName||'')).trim()||((data.fullName||data.name)||''));
+    r['{{first_name}}']=esc(data.firstName||(data.name?data.name.split(' ')[0]:'')||'');
+    r['{{last_name}}']=esc(data.lastName||(data.name&&data.name.indexOf(' ')>-1?data.name.substring(data.name.indexOf(' ')+1):'')||'');
+    r['{{email}}']=esc(data.email||'');
+    r['{{phone}}']=esc(data.phone||'');
+    r['{{company}}']=esc(data.company||'');
+    r['{{city}}']=esc(data.city||'');
+    r['{{state}}']=esc(data.state||'');
+    r['{{country}}']=esc(data.country||'');
+    r['{{date}}']=new Date().toLocaleDateString();
+    r['{{time}}']=new Date().toLocaleTimeString();
+    r['{{location}}']=[data.city,data.state,data.country].filter(Boolean).join(', ');
+    r['{{tracking_id}}']=esc(data.trackingId||'');
+    r['{{lastClickedProduct}}']=esc(data.lastClickedProduct||'');
+    r['{{lastProductClickDate}}']=esc(data.lastProductClickDate||'');
+    r['{{lastClickedProductPrice}}']=esc(data.lastClickedProductPrice||'');
+    r['{{lastClickedProductURL}}']=esc(data.lastClickedProductURL||'');
+    r['{{productsClickedCount}}']=esc(data.productsClickedCount||'0');
+    r['{{ip_address}}']=esc(data.ipAddress||'');
+    r['{{ip}}']=esc(data.ipAddress||'');
+    if(data.customFields){
+      for(var k in data.customFields){
+        r['{{'+k+'}}']=esc(String(data.customFields[k]||''));
+      }
+    }
+    params.forEach(function(v,k){
+      if(!paramMap[k]&&k!=='contact_id'&&k!=='page_id'&&k.indexOf('utm_')!==0){
+        r['{{'+k+'}}']=esc(v);
+      }
+    });
+    var hasValues=false;
+    for(var key in r){if(r[key]){hasValues=true;break;}}
+    if(!hasValues)return;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(n){
+        var p=n.parentNode;
+        if(p&&skipTags[p.nodeName])return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var node;
+    while(node=walker.nextNode()){
+      var txt=node.nodeValue;
+      if(txt&&txt.indexOf('{{')>-1){
+        var changed=txt;
+        for(var ph in r){
+          if(r[ph]&&changed.indexOf(ph)>-1){
+            changed=changed.split(ph).join(r[ph]);
+          }
+        }
+        if(changed!==txt)node.nodeValue=changed;
+      }
+    }
+    var attrs=['value','placeholder','content','alt','title'];
+    attrs.forEach(function(attr){
+      var els=document.querySelectorAll('['+attr+'*="{{"]');
+      for(var i=0;i<els.length;i++){
+        var tag=els[i].tagName;
+        if(skipTags[tag])continue;
+        var val=els[i].getAttribute(attr);
+        if(val){
+          var nv=val;
+          for(var ph in r){
+            if(r[ph]&&nv.indexOf(ph)>-1){
+              nv=nv.split(ph).join(r[ph]);
+            }
+          }
+          if(nv!==val)els[i].setAttribute(attr,nv);
+        }
+      }
+    });
+  }
+  function run(){
+    if(contactId){
+      var xhr=new XMLHttpRequest();
+      xhr.open('GET','https://paymegpt.com/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=3726');
+      xhr.onload=function(){
+        if(xhr.status===200){
+          try{
+            var resp=JSON.parse(xhr.responseText);
+            if(resp.success&&resp.contact){
+              var merged=resp.contact;
+              for(var k in fields){merged[k]=fields[k];}
+              doReplace(merged);
+              return;
+            }
+          }catch(e){}
+        }
+        if(hasUrlFields)doReplace(fields);
+      };
+      xhr.onerror=function(){if(hasUrlFields)doReplace(fields);};
+      xhr.send();
+    }else if(hasUrlFields){
+      doReplace(fields);
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}
+  else{run();}
+})();
+</script>
+<script data-payment>
+(function(){
+  var slug='GNUhxN';
+  var apiBase='https://paymegpt.com';
+  function findEmail(){
+    var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
+    var inputs=document.querySelectorAll('input[type="email"],input[name*="email"],input[placeholder*="email"],input[placeholder*="Email"]');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.includes('@'))return inputs[j].value.trim();}
+    return '';
+  }
+  function findName(){
+    var ids=['name','fullName','full-name','buyer-name','buyerName','customer-name','userName','user-name'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value)return el.value.trim();}
+    var inputs=document.querySelectorAll('input[name*="name"]:not([name*="email"]):not([type="email"]),input[placeholder*="name"]:not([placeholder*="email"]):not([type="email"]),input[placeholder*="Name"]:not([type="email"])');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value)return inputs[j].value.trim();}
+    return '';
+  }
+  var __realProcessPayment=function(a,b,c,d,e){
+    var amountCents,email,productName,productDescription,customerName,quantity;
+    if(a&&typeof a==='object'){
+      amountCents=a.amountCents;email=a.email;productName=a.productName;
+      productDescription=a.productDescription||'';customerName=a.name||'';quantity=a.quantity||1;
+    }else{
+      amountCents=typeof a==='number'?a:0;productName=typeof b==='string'?b:'';
+      productDescription=typeof c==='string'?c:'';email='';customerName='';quantity=1;
+    }
+    if(!email)email=findEmail();
+    if(!customerName)customerName=findName();
+    if(!productName){alert('Product name is required.');return Promise.reject('no_product_name');}
+    if(!amountCents||amountCents<100){alert('Amount must be at least $1.00');return Promise.reject('invalid_amount');}
+    if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
+    var successBase=window.location.href.split('?')[0];
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/payment/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,name:customerName,amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process payment');throw new Error(d.error);}
+    });
+  };
+  Object.defineProperty(window,'__processPayment',{value:__realProcessPayment,writable:false,configurable:false});
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('payment')==='success'){
+      var pName=urlParams.get('product')||'your item';
+      var overlay=document.createElement('div');overlay.id='payment-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">Thank you for purchasing '+pName.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'.</p><button onclick="document.getElementById(\'payment-success-overlay\').remove();window.history.replaceState({},\'\',window.location.pathname);" style="padding:12px 32px;font-size:16px;font-weight:600;background:#16a34a;color:white;border:none;border-radius:8px;cursor:pointer;">Continue</button></div>';
+      document.body.appendChild(overlay);
+    }
+  });
+})();
+</script>  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══ NAV — identical structure to homepage ══ -->
+<div class="nav-wrapper">
+  <div class="nav-top">
+    <div class="nav-top-social">
+      <a href="https://www.facebook.com/CloakAndPetal/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://twitter.com/CloakAndPetal" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+      <a href="https://www.instagram.com/cloakandpetal/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    </div>
+    <div class="nav-top-divider"></div>
+    <div class="nav-top-info">
+      <a href="https://maps.google.com/?q=1953+India+St+San+Diego+CA" target="_blank">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="#080608"/></svg>
+        1953 India St. Little Italy, San Diego 92101
+      </a>
+      <a href="tel:6195015505">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call Us: (619) 501-5505
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-bottom">
+    <!-- LEFT GROUP -->
+    <ul class="nav-group">
+      <li class="nav-item"><a href="https://paymegpt.com/p/NThxxqWSzx">Home</a></li>
+      <li class="nav-item">
+        <a href="#" class="active">About <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="https://cloakandpetal.com/about-us-2/" target="_blank">About Us</a>
+          <a href="#" class="active">Press &amp; Awards ⭐</a>
+          <a href="https://cloakandpetal.com/contact-cloak-and-petal/" target="_blank">Contact Us</a>
+          <a href="https://cloakandpetal.com/pages/reservations-little-italy-san-diego/" target="_blank">Reservations</a>
+          <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#">Parties <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank">Reserve 12 Guests or Less</a>
+          <a href="https://www.toasttab.com/invoice/lead?rx=b9a10cf8-40c8-4b88-a300-3cd2ee5a73e3" target="_blank">Reserve 13+ Guests</a>
+        </div>
+      </li>
+    </ul>
+
+    <!-- LOGO — 22px margin each side -->
+    <a href="https://paymegpt.com/p/NThxxqWSzx" class="nav-logo-wrap">
+      <img src="https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png" alt="Cloak & Petal Little Italy">
+    </a>
+
+    <!-- RIGHT GROUP -->
+    <ul class="nav-group">
+      <li class="nav-item">
+        <a href="#">Menus <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine In Menus</a>
+          <a href="https://cloakandpetal.com/happy-hour/" target="_blank">Happy Hour</a>
+          <a href="https://cloakandpetal.com/food-menus/spirit-list/" target="_blank">Spirit List</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order</a></li>
+      <li class="nav-item"><a href="https://www.toasttab.com/catering/cloak-and-petal-1953-india-st" target="_blank">Sushi Platters To Go</a></li>
+      <li class="nav-item"><a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="nav-reserve-btn">Reservations</a></li>
+    </ul>
+
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://paymegpt.com/p/NThxxqWSzx">Home</a>
+  <div class="mob-section">About</div>
+  <a href="https://cloakandpetal.com/about-us-2/" target="_blank">About Us</a>
+  <a href="#" class="active">Press &amp; Awards ⭐</a>
+  <a href="https://cloakandpetal.com/contact-cloak-and-petal/" target="_blank">Contact Us</a>
+  <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
+  <div class="mob-section">Parties</div>
+  <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank">Reserve 12 Guests or Less</a>
+  <a href="https://www.toasttab.com/invoice/lead?rx=b9a10cf8-40c8-4b88-a300-3cd2ee5a73e3" target="_blank">Reserve 13+ Guests</a>
+  <div class="mob-section">Menus</div>
+  <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine In Menus</a>
+  <a href="https://cloakandpetal.com/happy-hour/" target="_blank">Happy Hour</a>
+  <a href="https://cloakandpetal.com/food-menus/spirit-list/" target="_blank">Spirit List</a>
+  <div class="mob-section">More</div>
+  <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order Online</a>
+  <a href="https://www.toasttab.com/catering/cloak-and-petal-1953-india-st" target="_blank">Sushi Platters To Go</a>
+  <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="mob-reserve">Reservations</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <span class="hero-label">Recognition &amp; Acclaim</span>
+  <h1 class="hero-title">Press &amp; <span class="accent">Awards</span></h1>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">From MICHELIN Guide recognition to community awards, Cloak &amp; Petal has earned its place as one of San Diego's most celebrated dining destinations.</p>
+</div>
+
+<!-- MICHELIN -->
+<section class="michelin-section">
+  <div class="michelin-inner">
+    <div class="michelin-badge"><span class="michelin-icon">⭐</span><div class="michelin-badge-label">MICHELIN<br>Guide<br>Restaurant</div></div>
+    <div class="michelin-text">
+      <span class="section-label">The Highest Honor</span>
+      <h2>Recognized by the<br>MICHELIN Guide</h2>
+      <p>Cloak &amp; Petal has earned a coveted spot in the prestigious MICHELIN Guide — the world's most respected restaurant authority. Located in the heart of Little Italy at 1953 India St, the guide describes it as a place where "you won't hear any old country music" — just pure, inspired Japanese cuisine in a setting unlike any other in San Diego.</p>
+      <a href="https://guide.michelin.com/us/en/california/us-san-diego/restaurant/cloak-petal" target="_blank" class="michelin-link">View on MICHELIN Guide →</a>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards-section">
+  <div class="section-header">
+    <span class="section-label-sm">Community &amp; Industry Recognition</span>
+    <h2 class="section-heading">Our <span class="accent">Awards</span></h2>
+  </div>
+  <div class="awards-grid">
+    <div class="award-card featured"><span class="award-trophy">🥇</span><span class="award-year">2022</span><div class="award-title">Best Asian Restaurant in San Diego</div><div class="award-org">California Restaurant Association · Gold Medallion</div><p class="award-desc">Cloak &amp; Petal took home the California Restaurant Association's Gold Medallion Award for the best Asian dining experience in all of San Diego.</p><a href="https://www.cbsnews.com/sandiego/news/cloak-petal-restaurant-bar-wins-award-for-best-asian-restaurant-in-san-diego/" target="_blank" class="award-link">Read the CBS 8 Report →</a></div>
+    <div class="award-card featured"><span class="award-trophy">🏆</span><span class="award-year">2025</span><div class="award-title">Best Appetizer</div><div class="award-org">Uptown / Downtown Best of 2025 · Times of San Diego</div><p class="award-desc">In the community-voted Uptown/Downtown Best of 2025 poll, Cloak &amp; Petal was recognized for the Best Appetizer — chosen by the very neighbors who love the restaurant most.</p><a href="https://timesofsandiego.com/wp-content/uploads/2025/12/UDTSD-Best-of-2025.pdf" target="_blank" class="award-link">Read the Award Report →</a></div>
+    <div class="award-card"><span class="award-trophy">🌟</span><span class="award-year">2024</span><div class="award-title">Yelp Elite Top Spot</div><div class="award-org">Yelp · San Diego</div><p class="award-desc">Honored by the Yelp Elite community as one of San Diego's top dining destinations.</p><a href="https://www.yelp.com/biz/cloak-and-petal-san-diego" target="_blank" class="award-link">View on Yelp →</a></div>
+    <div class="award-card"><span class="award-trophy">📰</span><span class="award-year">2026</span><div class="award-title">Best Restaurants Nomination</div><div class="award-org">San Diego Magazine · Best of San Diego</div><p class="award-desc">Nominated for San Diego Magazine's prestigious Best Restaurants 2026.</p><a href="https://www.sandiegomagazine.com/" target="_blank" class="award-link">San Diego Magazine →</a></div>
+    <div class="award-card"><span class="award-trophy">🎉</span><span class="award-year">2023</span><div class="award-title">Five-Year Anniversary Celebration</div><div class="award-org">There San Diego</div><p class="award-desc">Celebrated five landmark years in Little Italy — recognized as one of the neighborhood's most beloved restaurants.</p><a href="https://www.theresandiego.com/" target="_blank" class="award-link">Read the Feature →</a></div>
+    <div class="award-card"><span class="award-trophy">🗞️</span><span class="award-year">2024</span><div class="award-title">MICHELIN Guide Feature</div><div class="award-org">Fox 5 San Diego</div><p class="award-desc">Fox 5 San Diego highlighted Cloak &amp; Petal's MICHELIN Guide recognition and its Harajuku-inspired aesthetic.</p><a href="https://fox5sandiego.com/news/local-news/little-italy-eatery-that-nods-to-tokyos-harajuku-culture/" target="_blank" class="award-link">Read the Fox 5 Story →</a></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-strip">
+  <span class="quote-mark">&ldquo;</span>
+  <p class="quote-text">It's in the heart of Little Italy, but you won't hear any old country music — Cloak &amp; Petal is a world unto itself.</p>
+  <div class="quote-source">— <span>MICHELIN Guide</span>, San Diego</div>
+</div>
+
+<!-- PRESS -->
+<section class="press-section">
+  <div class="press-inner">
+    <div class="section-header"><span class="section-label-sm">In the Media</span><h2 class="section-heading">Press <span class="accent">Coverage</span></h2></div>
+    <div class="press-grid">
+      <a href="https://sandiego.eater.com/2022/5/26/23142940/cloak-petal-shibuya-nights-japanese-cocktail-bar-restaurant-little-italy-san-diego" target="_blank" class="press-card"><span class="press-outlet">Eater San Diego</span><div class="press-headline">Little Italy's Cloak &amp; Petal Unveils New Japanese Bar and Lounge</div><div class="press-date">May 26, 2022</div><p class="press-excerpt">Cloak &amp; Petal launches Shibuya Nights — an immersive Tokyo-inspired cocktail bar inside the restaurant.</p><span class="press-read">Read Story →</span></a>
+      <a href="https://www.sandiegomagazine.com/food-drink/how-japanese-fusion-stacks-up-at-little-italys-cloak-petal/" target="_blank" class="press-card"><span class="press-outlet">San Diego Magazine</span><div class="press-headline">How Japanese Fusion Stacks Up at Little Italy's Cloak &amp; Petal</div><div class="press-date">June 22, 2018</div><p class="press-excerpt">Cloak &amp; Petal excels at showmanship — from the tinfoil-looking wallpaper to those come-hither cherry blossoms.</p><span class="press-read">Read Story →</span></a>
+      <a href="https://fox5sandiego.com/news/local-news/little-italy-eatery-that-nods-to-tokyos-harajuku-culture/" target="_blank" class="press-card"><span class="press-outlet">Fox 5 San Diego</span><div class="press-headline">Little Italy Eatery That Nods to Tokyo's Harajuku Culture</div><div class="press-date">August 18, 2024</div><p class="press-excerpt">The MICHELIN Guide recognized eatery known for its faux cherry blossom trees and inspired Japanese menu.</p><span class="press-read">Read Story →</span></a>
+      <a href="https://www.cbsnews.com/sandiego/news/cloak-petal-restaurant-bar-wins-award-for-best-asian-restaurant-in-san-diego/" target="_blank" class="press-card"><span class="press-outlet">CBS News 8 San Diego</span><div class="press-headline">Cloak &amp; Petal Wins Award for Best Asian Restaurant in San Diego</div><div class="press-date">November 1, 2022</div><p class="press-excerpt">CBS 8 covers the California Restaurant Association Gold Medallion win for Best Asian Restaurant.</p><span class="press-read">Read Story →</span></a>
+      <a href="https://guide.michelin.com/us/en/california/us-san-diego/restaurant/cloak-petal" target="_blank" class="press-card"><span class="press-outlet">MICHELIN Guide</span><div class="press-headline">Cloak &amp; Petal — A MICHELIN Guide Restaurant, San Diego</div><div class="press-date">MICHELIN Guide USA</div><p class="press-excerpt">The world's most respected culinary authority recognizes Cloak &amp; Petal as a destination restaurant in Little Italy.</p><span class="press-read">View on MICHELIN →</span></a>
+      <a href="https://timesofsandiego.com/wp-content/uploads/2025/12/UDTSD-Best-of-2025.pdf" target="_blank" class="press-card"><span class="press-outlet">Times of San Diego</span><div class="press-headline">Uptown / Downtown Best of 2025 — Best Appetizer Winner</div><div class="press-date">December 5, 2025</div><p class="press-excerpt">The community-voted Best of 2025 poll names Cloak &amp; Petal the winner for Best Appetizer.</p><span class="press-read">Read the Report →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- BADGES -->
+<section class="social-proof">
+  <span class="section-label-sm">Also Recognized By</span>
+  <h2 class="section-heading" style="font-size:clamp(28px,3vw,42px);margin-top:12px;">A Legacy of <span class="accent">Excellence</span></h2>
+  <div class="badges-row">
+    <div class="badge-pill gold">⭐ MICHELIN Guide</div>
+    <div class="badge-pill gold">🥇 CA Restaurant Association Gold Medallion</div>
+    <div class="badge-pill">🏆 Best Asian Restaurant 2022</div>
+    <div class="badge-pill">🍴 Best Appetizer 2025</div>
+    <div class="badge-pill">📍 Yelp Elite Top Spot</div>
+    <div class="badge-pill">📰 Eater San Diego Featured</div>
+    <div class="badge-pill">🎬 Fox 5 San Diego Featured</div>
+    <div class="badge-pill">📺 CBS 8 San Diego Featured</div>
+    <div class="badge-pill">📖 San Diego Magazine Featured</div>
+    <div class="badge-pill">🌸 SD's Most Beautiful Restaurants 2017</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Come Experience It Yourself</h2>
+  <p>Award-winning sushi, craft cocktails, and an atmosphere unlike anywhere else in San Diego.</p>
+  <div class="cta-btns">
+    <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="btn-primary">Reserve a Table</a>
+    <a href="https://paymegpt.com/p/NThxxqWSzx" class="btn-ghost">← Back to Home</a>
+  </div>
+</section>
+
+<div class="page-footer">
+  <p>© 2025 Cloak and Petal · 1953 India St, Little Italy, San Diego · <a href="tel:6195015505">(619) 501-5505</a> · <a href="https://cloakandpetal.com/statement-of-ada-compliance/">ADA Compliance</a></p>
+</div>
+
+<!-- VIP -->
+<div id="vip-callout">
+  <button class="vip-close" onclick="closeVip()">✕</button>
+  <div class="vip-emoji">🌸</div>
+  <div class="vip-text"><p>Welcome! Join or access our <strong>Cloak VIP</strong> club here, or ask me anything!</p></div>
+</div>
+
+<!-- CHAT -->
+<div id="cp-chat-bubble" onclick="openChat()"><img src="https://images.getkrowd.com/images/cloackIcon.png" alt="Chat"></div>
+<div id="cp-chat-frame"><iframe id="cp-chat-iframe" src="" allow="microphone"></iframe></div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
