@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://cloak.getkrowd.com/</loc>
+    <lastmod>2026-05-04T00:53:37.473Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://cloak.getkrowd.com/press/</loc>
-    <lastmod>2026-05-04T00:52:33.357Z</lastmod>
+    <lastmod>2026-05-04T00:53:07.658Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>
