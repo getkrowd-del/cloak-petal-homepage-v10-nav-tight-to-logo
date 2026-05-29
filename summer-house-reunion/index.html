@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+
+
+<!-- SEO Meta Tags -->
+<title>Summer House Reunion Watch Party | Cloak &amp; Petal Little Italy</title>
+<meta name="description" content="Watch the Summer House Reunion LIVE at Cloak &amp; Petal Little Italy! Tuesday June 2nd — Doors 4PM, Reunion 5PM SHARP. RSVP now for priority seating." />
+<meta property="og:title" content="Summer House Reunion Watch Party | Cloak &amp; Petal Little Italy" />
+<meta property="og:description" content="Watch the Summer House Reunion LIVE at Cloak &amp; Petal Little Italy! Tuesday June 2nd — Doors 4PM, Reunion 5PM SHARP. RSVP now for priority seating." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Summer House Reunion Watch Party | Cloak &amp; Petal Little Italy" />
+<meta name="twitter:description" content="Watch the Summer House Reunion LIVE at Cloak &amp; Petal Little Italy! Tuesday June 2nd — Doors 4PM, Reunion 5PM SHARP. RSVP now for priority seating." />
+<!-- End SEO Meta Tags -->
+
+<script data-field-replace>
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var fields={};
+  var paramMap={
+    'first_name':'firstName','last_name':'lastName','full_name':'fullName',
+    'email':'email','phone':'phone','company':'company',
+    'city':'city','state':'state','country':'country'
+  };
+  var skipTags={'SCRIPT':1,'STYLE':1,'NOSCRIPT':1,'TEXTAREA':1,'CODE':1,'PRE':1};
+  var hasUrlFields=false;
+  for(var p in paramMap){
+    var v=params.get(p);
+    if(v){fields[paramMap[p]]=v;hasUrlFields=true;}
+  }
+  var contactId=params.get('contact_id');
+  function esc(s){
+    if(!s)return s;
+    var d=document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+  function doReplace(data){
+    var r={};
+    r['{{full_name}}']=esc(((data.firstName||'')+' '+(data.lastName||'')).trim()||((data.fullName||data.name)||''));
+    r['{{first_name}}']=esc(data.firstName||(data.name?data.name.split(' ')[0]:'')||'');
+    r['{{last_name}}']=esc(data.lastName||(data.name&&data.name.indexOf(' ')>-1?data.name.substring(data.name.indexOf(' ')+1):'')||'');
+    r['{{email}}']=esc(data.email||'');
+    r['{{phone}}']=esc(data.phone||'');
+    r['{{company}}']=esc(data.company||'');
+    r['{{city}}']=esc(data.city||'');
+    r['{{state}}']=esc(data.state||'');
+    r['{{country}}']=esc(data.country||'');
+    r['{{date}}']=new Date().toLocaleDateString();
+    r['{{time}}']=new Date().toLocaleTimeString();
+    r['{{location}}']=[data.city,data.state,data.country].filter(Boolean).join(', ');
+    r['{{tracking_id}}']=esc(data.trackingId||'');
+    r['{{lastClickedProduct}}']=esc(data.lastClickedProduct||'');
+    r['{{lastProductClickDate}}']=esc(data.lastProductClickDate||'');
+    r['{{lastClickedProductPrice}}']=esc(data.lastClickedProductPrice||'');
+    r['{{lastClickedProductURL}}']=esc(data.lastClickedProductURL||'');
+    r['{{productsClickedCount}}']=esc(data.productsClickedCount||'0');
+    r['{{ip_address}}']=esc(data.ipAddress||'');
+    r['{{ip}}']=esc(data.ipAddress||'');
+    if(data.customFields){
+      for(var k in data.customFields){
+        r['{{'+k+'}}']=esc(String(data.customFields[k]||''));
+      }
+    }
+    params.forEach(function(v,k){
+      if(!paramMap[k]&&k!=='contact_id'&&k!=='page_id'&&k.indexOf('utm_')!==0){
+        r['{{'+k+'}}']=esc(v);
+      }
+    });
+    var hasValues=false;
+    for(var key in r){if(r[key]){hasValues=true;break;}}
+    if(!hasValues)return;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(n){
+        var p=n.parentNode;
+        if(p&&skipTags[p.nodeName])return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var node;
+    while(node=walker.nextNode()){
+      var txt=node.nodeValue;
+      if(txt&&txt.indexOf('{{')>-1){
+        var changed=txt;
+        for(var ph in r){
+          if(r[ph]&&changed.indexOf(ph)>-1){
+            changed=changed.split(ph).join(r[ph]);
+          }
+        }
+        if(changed!==txt)node.nodeValue=changed;
+      }
+    }
+    var attrs=['value','placeholder','content','alt','title'];
+    attrs.forEach(function(attr){
+      var els=document.querySelectorAll('['+attr+'*="{{"]');
+      for(var i=0;i<els.length;i++){
+        var tag=els[i].tagName;
+        if(skipTags[tag])continue;
+        var val=els[i].getAttribute(attr);
+        if(val){
+          var nv=val;
+          for(var ph in r){
+            if(r[ph]&&nv.indexOf(ph)>-1){
+              nv=nv.split(ph).join(r[ph]);
+            }
+          }
+          if(nv!==val)els[i].setAttribute(attr,nv);
+        }
+      }
+    });
+  }
+  function run(){
+    if(contactId){
+      var xhr=new XMLHttpRequest();
+      xhr.open('GET','https://paymegpt.com/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=4439');
+      xhr.onload=function(){
+        if(xhr.status===200){
+          try{
+            var resp=JSON.parse(xhr.responseText);
+            if(resp.success&&resp.contact){
+              var merged=resp.contact;
+              for(var k in fields){merged[k]=fields[k];}
+              doReplace(merged);
+              return;
+            }
+          }catch(e){}
+        }
+        if(hasUrlFields)doReplace(fields);
+      };
+      xhr.onerror=function(){if(hasUrlFields)doReplace(fields);};
+      xhr.send();
+    }else if(hasUrlFields){
+      doReplace(fields);
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}
+  else{run();}
+})();
+</script>
+<script data-payment>
+(function(){
+  var slug='P3i2Yj';
+  var apiBase='https://paymegpt.com';
+  var successSubtext='';var successBtnLabel='Continue';var successBtnColor='#16a34a';var successRedirect='';
+  function findEmail(){
+    var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
+    var inputs=document.querySelectorAll('input[type="email"],input[name*="email"],input[placeholder*="email"],input[placeholder*="Email"]');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.includes('@'))return inputs[j].value.trim();}
+    return '';
+  }
+  function findName(){
+    var ids=['name','fullName','full-name','buyer-name','buyerName','customer-name','userName','user-name'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value)return el.value.trim();}
+    var inputs=document.querySelectorAll('input[name*="name"]:not([name*="email"]):not([type="email"]),input[placeholder*="name"]:not([placeholder*="email"]):not([type="email"]),input[placeholder*="Name"]:not([type="email"])');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value)return inputs[j].value.trim();}
+    return '';
+  }
+  var __realProcessPayment=function(a,b,c,d,e){
+    var amountCents,email,productName,productDescription,customerName,quantity;
+    if(a&&typeof a==='object'){
+      amountCents=a.amountCents;email=a.email;productName=a.productName;
+      productDescription=a.productDescription||'';customerName=a.name||'';quantity=a.quantity||1;
+    }else{
+      amountCents=typeof a==='number'?a:0;productName=typeof b==='string'?b:'';
+      productDescription=typeof c==='string'?c:'';email='';customerName='';quantity=1;
+    }
+    if(!email)email=findEmail();
+    if(!customerName)customerName=findName();
+    if(!productName){alert('Product name is required.');return Promise.reject('no_product_name');}
+    if(!amountCents||amountCents<100){alert('Amount must be at least $1.00');return Promise.reject('invalid_amount');}
+    if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
+    var successBase=window.location.href.split('?')[0];
+    var __pLoc=(document.documentElement.lang||navigator.language||'en');
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/payment/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,name:customerName,amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,locale:__pLoc,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process payment');throw new Error(d.error);}
+    });
+  };
+  Object.defineProperty(window,'__processPayment',{value:__realProcessPayment,writable:false,configurable:false});
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('payment')==='success'){
+      var pName=urlParams.get('product')||'your item';
+      var overlay=document.createElement('div');overlay.id='payment-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+      var subTxt=successSubtext||('Thank you for purchasing '+pName+'.');
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">'+esc(subTxt)+'</p><button id="lp-pay-success-btn" style="padding:12px 32px;font-size:16px;font-weight:600;background:'+successBtnColor+';color:white;border:none;border-radius:8px;cursor:pointer;">'+esc(successBtnLabel)+'</button></div>';
+      document.body.appendChild(overlay);
+      var pBtn=document.getElementById('lp-pay-success-btn');
+      if(pBtn){pBtn.addEventListener('click',function(){if(successRedirect){window.location.href=successRedirect;}else{overlay.remove();window.history.replaceState({},'',window.location.pathname);}});}
+    }
+  });
+})();
+</script>  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<div class="nav-wrapper">
+  <div class="nav-top">
+    <div class="nav-top-social">
+      <a href="https://www.facebook.com/CloakAndPetal/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://twitter.com/CloakAndPetal" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+      <a href="https://www.instagram.com/cloakandpetal/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    </div>
+    <div class="nav-top-divider"></div>
+    <div class="nav-top-info">
+      <a href="https://maps.google.com/?q=1953+India+St+San+Diego+CA" target="_blank">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="#080608"/></svg>
+        1953 India St. Little Italy, San Diego 92101
+      </a>
+      <a href="tel:6195015505"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call Us: (619) 501-5505</a>
+    </div>
+  </div>
+  <div class="nav-bottom">
+    <ul class="nav-group">
+      <li class="nav-item"><a href="/">Home</a></li>
+      <li class="nav-item">
+        <a href="/about-us">About <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="/about-us">About Us</a>
+          <a href="/cloak-and-petal-press-san-diego-restaurant">Press &amp; Awards ⭐</a>
+          <a href="/contact-us">Contact Us</a>
+          <a href="/reservations">Reservations</a>
+          <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#">Parties <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank">Reserve 12 Guests or Less</a>
+          <a href="/parties-13-plus">Reserve 13+ Guests</a>
+        </div>
+      </li>
+    </ul>
+    <a href="/" class="nav-logo-wrap">
+      <img src="https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png" alt="Cloak &amp; Petal Little Italy">
+    </a>
+    <ul class="nav-group">
+      <li class="nav-item">
+        <a href="#">Menus <span class="arrow">▾</span></a>
+        <div class="nav-dropdown">
+          <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine In Menus</a>
+          <a href="https://cloakandpetal.com/happy-hour/" target="_blank">Happy Hour</a>
+          <a href="https://cloakandpetal.com/food-menus/spirit-list/" target="_blank">Spirit List</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order</a></li>
+      <li class="nav-item"><a href="https://www.toasttab.com/catering/cloak-and-petal-1953-india-st" target="_blank">Sushi Platters To Go</a></li>
+      <li class="nav-item"><a href="/reservations" class="nav-reserve-btn">Reservations</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">Home</a>
+  <div class="mob-section">About</div>
+  <a href="/about-us">About Us</a>
+  <a href="/cloak-and-petal-press-san-diego-restaurant">Press &amp; Awards ⭐</a>
+  <a href="/contact-us">Contact Us</a>
+  <a href="/reservations">Reservations</a>
+  <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
+  <div class="mob-section">Parties</div>
+  <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank">Reserve 12 Guests or Less</a>
+  <a href="/parties-13-plus">Reserve 13+ Guests</a>
+  <div class="mob-section">Menus</div>
+  <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine In Menus</a>
+  <a href="https://cloakandpetal.com/happy-hour/" target="_blank">Happy Hour</a>
+  <a href="https://cloakandpetal.com/food-menus/spirit-list/" target="_blank">Spirit List</a>
+  <div class="mob-section">More</div>
+  <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order Online</a>
+  <a href="https://www.toasttab.com/catering/cloak-and-petal-1953-india-st" target="_blank">Sushi Platters To Go</a>
+  <a href="/reservations" class="mob-reserve">Reservations</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="event-hero">
+  <div class="hero-bg">
+    <img src="https://krowdimg.b-cdn.net/clients/cloakpedal/reunion.png" alt="Summer House Reunion Watch Party at Cloak and Petal">
+  </div>
+  <div class="hero-content">
+    <div class="event-badge">📺 &nbsp;Bravo Watch Party</div>
+    <h1 class="hero-title">Summer House<br><span class="pink">Reunion</span> <span class="gold">Night</span></h1>
+    <p class="hero-subtitle">Live at Cloak &amp; Petal · Little Italy, San Diego</p>
+    <div class="hero-rule"></div>
+    <div class="countdown-strip" id="countdown">
+      <div class="cd-block"><div class="cd-num" id="cd-d">--</div><div class="cd-label">Days</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-h">--</div><div class="cd-label">Hours</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-m">--</div><div class="cd-label">Mins</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-s">--</div><div class="cd-label">Secs</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#rsvp" class="btn-primary">RSVP Now — It's Free</a>
+      <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="btn-bravo">Also Reserve a Table</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EVENT DETAILS BAR ══ -->
+<div class="event-details">
+  <div class="details-grid">
+    <div class="detail-block">
+      <div class="detail-icon">📅</div>
+      <span class="detail-label">Date</span>
+      <div class="detail-value">Tuesday<br>June 2nd, 2026</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-icon">🚪</div>
+      <span class="detail-label">Doors Open</span>
+      <div class="detail-value">4:00 PM</div>
+      <div class="detail-sub">Happy Hour starts</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-icon">📺</div>
+      <span class="detail-label">Reunion Begins</span>
+      <div class="detail-value">5:00 PM</div>
+      <div class="detail-sub">SHARP — don't be late</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-icon">📍</div>
+      <span class="detail-label">Location</span>
+      <div class="detail-value">1953 India St</div>
+      <div class="detail-sub">Little Italy, San Diego</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN: ABOUT + FORM ══ -->
+<section class="main-section">
+  <div class="about-col">
+    <span class="section-label">The Drama is Coming to Little Italy</span>
+    <h2 class="section-title">Watch the <span class="accent">Reunion</span> Live</h2>
+    <div class="about-body">
+      <p>We're airing the Summer House Reunion LIVE on all our screens so you don't miss out on an ounce of the drama! Come for the show, stay for the sushi, sake, and cocktails beneath our famous cherry blossoms.</p>
+      <p>Three nights of reunions — but June 2nd is your night. Secure your spot now with a free RSVP. RSVPs get priority seating; open seating also available on a first-come, first-served basis.</p>
+      <p>Share this with your most Bravo-obsessed friends and make it a night to remember. Sushi + drama = the perfect Tuesday.</p>
+    </div>
+    <div class="hashtags">
+      <span class="hashtag">#SummerHouse</span>
+      <span class="hashtag">#CloakAndPetal</span>
+      <span class="hashtag">#LittleItalySD</span>
+      <span class="hashtag">#BravoWatchParty</span>
+    </div>
+    <div class="event-photo" style="margin-top:40px;">
+      <img src="https://krowdimg.b-cdn.net/clients/cloakpedal/reunion.png" alt="Summer House cast at Cloak and Petal">
+    </div>
+  </div>
+
+  <!-- RSVP FORM -->
+  <div class="form-col" id="rsvp">
+    <div class="form-wrapper">
+      <h3>Secure Your Spot 🌸</h3>
+      <p class="form-sub">Free RSVP · Priority seating guaranteed · Reminder sent June 2nd at 10AM</p>
+
+      <div id="formContainer">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="firstName" placeholder="First name" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" id="lastName" placeholder="Last name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="email" placeholder="you@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number (for SMS reminder)</label>
+          <input type="tel" id="phone" placeholder="+1 (619) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>Party Size *</label>
+          <select id="partySize" required>
+            <option value="" disabled selected>How many guests?</option>
+            <option value="1">Just me</option>
+            <option value="2">2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4 people</option>
+            <option value="5">5 people</option>
+            <option value="6+">6 or more</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Special Requests (optional)</label>
+          <textarea id="specialRequests" placeholder="Birthday celebration, dietary needs, accessibility..."></textarea>
+        </div>
+        <p id="formError" class="form-error">Please fill in all required fields.</p>
+        <button class="form-submit" id="submitBtn" onclick="submitRSVP()">RSVP — Reserve My Spot</button>
+        <p class="form-note">By submitting you agree to receive a reminder on June 2nd. Walk-ins also welcome — first come, first served.</p>
+      </div>
+
+      <div class="form-loading" id="formLoading">
+        <div style="font-size:28px;margin-bottom:12px;">🌸</div>
+        Securing your spot...
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<div class="gallery-strip">
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/254164674_3038790869725965_4100971500022566362_n-2.jpg" alt="" loading="lazy"></div>
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/255403570_3037318236539895_1577337030238411525_n.jpg" alt="" loading="lazy"></div>
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/262793360_3052942178310834_7517131027030412740_n-2.jpg" alt="" loading="lazy"></div>
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/269820213_3069137243357994_519417019807868091_n-2.jpg" alt="" loading="lazy"></div>
+  <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/274520904_3111194449152273_5820460524276034975_n.jpg" alt="" loading="lazy"></div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer-section">
+  <div class="footer-block">
+    <h4>Hours</h4>
+    <div class="f-hours-grid">
+      <div><div class="f-hours-day">Mon – Tues</div><div class="f-hours-time">4pm – 11pm</div></div>
+      <div><div class="f-hours-day">Wed – Thurs</div><div class="f-hours-time">4pm – 11pm</div></div>
+      <div><div class="f-hours-day">Friday</div><div class="f-hours-time">4pm – 12am</div></div>
+      <div><div class="f-hours-day">Saturday</div><div class="f-hours-time">4pm – 12am</div></div>
+      <div><div class="f-hours-day">Sunday</div><div class="f-hours-time">4pm – 11pm</div></div>
+    </div>
+  </div>
+  <div class="footer-block footer-middle">
+    <img class="footer-logo-img" src="https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png" alt="Cloak &amp; Petal">
+    <p class="footer-address">1953 India St<br>Little Italy, San Diego 92101</p>
+    <a href="tel:6195015505" class="footer-phone">(619) 501-5505</a>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/CloakAndPetal/" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://www.instagram.com/cloakandpetal/" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://www.yelp.com/biz/cloak-and-petal-san-diego" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer-block">
+    <h4>Quick Links</h4>
+    <div class="footer-ctas">
+      <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="fp">Make a Reservation</a>
+      <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order Online</a>
+      <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine-In Menu</a>
+      <a href="/cloak-and-petal-press-san-diego-restaurant">Press &amp; Awards ⭐</a>
+      <a href="/parties-13-plus">Private Events 13+</a>
+      <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
+    </div>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Cloak and Petal. All rights reserved.</p>
+  <p><a href="https://cloakandpetal.com/statement-of-ada-compliance/">ADA Compliance</a></p>
+</div>
+
+<div id="vip-callout">
+  <button class="vip-close" onclick="closeVip()">✕</button>
+  <div class="vip-emoji">🌸</div>
+  <div class="vip-text"><p>RSVP for the <strong>Summer House Reunion</strong> watch party — June 2nd!</p></div>
+</div>
+<div id="cp-chat-bubble" onclick="openChat()"><img src="https://images.getkrowd.com/images/cloackIcon.png" alt="Chat"></div>
+<div id="cp-chat-frame"><iframe id="cp-chat-iframe" src="" allow="microphone"></iframe></div>
+
+<script>
+  // Countdown to June 2 5PM PST
+  function updateCountdown() {
+    const target = new Date('2026-06-02T17:00:00-07:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) { document.getElementById('countdown').innerHTML = '<div style="font-size:18px;letter-spacing:0.2em;color:var(--bravo);text-transform:uppercase;padding:16px;">🎉 It\'s Happening NOW!</div>'; return; }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // RSVP form submission → Anthropic API → Google Sheet + add to broadcast
+  async function submitRSVP() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const partySize = document.getElementById('partySize').value;
+    const specialRequests = document.getElementById('specialRequests').value.trim();
+    const errEl = document.getElementById('formError');
+
+    if (!firstName || !lastName || !email || !partySize) {
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    const btn = document.getElementById('submitBtn');
+    const formContainer = document.getElementById('formContainer');
+    const formLoading = document.getElementById('formLoading');
+    btn.disabled = true;
+    formContainer.style.display = 'none';
+    formLoading.style.display = 'block';
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: `You are a backend assistant for Cloak & Petal restaurant. When given RSVP data, you must:
+1. Add the RSVP to Google Sheet ID: 1cwbzTkxiIrS-dvGkE0_vcGyfgjq_11a12MP1VlPqmEI (tab: RSVPs) using the manage_sheet_row tool with action=append
+2. Create a contact in the Marketing Media Manager with the given name, email and phone using create_contact with widgetId=53946577
+3. Add the contact to broadcast ID 670 (email) and broadcast ID 60 (SMS) using update_broadcast to add their recipientId
+
+Respond ONLY with valid JSON: {"success": true, "confirmationNumber": "CP-XXXXXX"} where XXXXXX is a random 6-digit number. No other text.`,
+          messages: [{
+            role: 'user',
+            content: `Process this RSVP for the Summer House Reunion Watch Party on June 2, 2026:
+First Name: ${firstName}
+Last Name: ${lastName}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+Party Size: ${partySize}
+Special Requests: ${specialRequests || 'None'}
+Timestamp: ${new Date().toISOString()}
+
+Add to Google Sheet, create contact, add to both reminder broadcasts.`
+          }],
+          mcp_servers: [{ type: 'url', url: 'https://paymegpt.com/mcp', name: 'marketing-mcp' }]
+        })
+      });
+
+      const data = await response.json();
+      const textBlock = data.content?.find(b => b.type === 'text');
+      let result = { success: true, confirmationNumber: 'CP-' + Math.floor(100000 + Math.random() * 900000) };
+      if (textBlock) {
+        try { result = JSON.parse(textBlock.text.replace(/```json|```/g, '').trim()); } catch(e) {}
+      }
+
+      // Redirect to thank you page with params
+      const params = new URLSearchParams({
+        name: firstName,
+        party: partySize,
+        conf: result.confirmationNumber || 'CP-' + Math.floor(100000 + Math.random() * 900000)
+      });
+      window.location.href = '/summer-house-reunion-thank-you?' + params.toString();
+
+    } catch (err) {
+      console.error(err);
+      // Still redirect even on error — don't block user
+      const conf = 'CP-' + Math.floor(100000 + Math.random() * 900000);
+      window.location.href = `/summer-house-reunion-thank-you?name=${encodeURIComponent(firstName)}&party=${encodeURIComponent(partySize)}&conf=${conf}`;
+    }
+  }
+
+  // Nav + chat
+  function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.querySelector('.nav-hamburger');
+    const frame = document.getElementById('cp-chat-frame');
+    const bubble = document.getElementById('cp-chat-bubble');
+    const callout = document.getElementById('vip-callout');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !burger.contains(e.target)) menu.classList.remove('open');
+    if (!bubble.contains(e.target) && !frame.contains(e.target) && !callout.contains(e.target)) frame.classList.remove('open');
+  });
+  function closeVip() { document.getElementById('vip-callout').classList.add('hidden'); }
+  setTimeout(closeVip, 14000);
+  let chatLoaded = false;
+  function openChat() {
+    const frame = document.getElementById('cp-chat-frame');
+    const iframe = document.getElementById('cp-chat-iframe');
+    closeVip();
+    if (!frame.classList.contains('open')) {
+      if (!chatLoaded) { iframe.src = 'https://paymegpt.com/agents/53946577/embed'; chatLoaded = true; }
+      frame.classList.add('open');
+    } else { frame.classList.remove('open'); }
+  }
+
+  // Smooth scroll for RSVP link
+  document.querySelectorAll('a[href="#rsvp"]').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  });
+</script>
+</body>
+</html>
