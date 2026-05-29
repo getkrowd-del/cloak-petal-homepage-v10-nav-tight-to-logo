@@ -204,7 +204,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <div class="nav-wrapper">
   <div class="nav-bottom">
     <a href="/" class="nav-logo-wrap">
@@ -213,10 +212,8 @@
   </div>
 </div>
 
-<!-- CONFETTI -->
 <div class="confetti-wrap" id="confettiWrap"></div>
 
-<!-- HERO / CONFIRMATION -->
 <section class="ty-hero">
   <div class="hero-bg">
     <img src="https://krowdimg.b-cdn.net/clients/cloakpedal/reunion.png" alt="Summer House Reunion">
@@ -231,36 +228,44 @@
     <!-- CONFIRMATION CARD -->
     <div class="conf-card">
       <span class="conf-card-header">🎟️ &nbsp;Reservation Confirmation</span>
-      <div class="conf-number" id="confNumber">CP-------</div>
-      <div class="conf-name" id="confNameFull">Your reservation is confirmed</div>
+      <div class="conf-number" id="confNumber">CP------</div>
       <div class="conf-divider"></div>
       <div class="conf-details">
-        <div>
-          <span class="conf-detail-label">Event</span>
-          <div class="conf-detail-val">Summer House Reunion</div>
-        </div>
-        <div>
-          <span class="conf-detail-label">Date</span>
-          <div class="conf-detail-val">Tue, June 2nd 2026</div>
-        </div>
-        <div>
-          <span class="conf-detail-label">Doors Open</span>
-          <div class="conf-detail-val">4:00 PM</div>
-        </div>
-        <div>
-          <span class="conf-detail-label">Reunion Begins</span>
-          <div class="conf-detail-val">5:00 PM SHARP</div>
-        </div>
-        <div>
-          <span class="conf-detail-label">Venue</span>
-          <div class="conf-detail-val">Cloak &amp; Petal</div>
-        </div>
-        <div>
-          <span class="conf-detail-label">Party Size</span>
-          <div class="conf-detail-val" id="confParty">—</div>
+        <div><span class="conf-detail-label">Event</span><div class="conf-detail-val">Summer House Reunion</div></div>
+        <div><span class="conf-detail-label">Date</span><div class="conf-detail-val">Tue, June 2nd 2026</div></div>
+        <div><span class="conf-detail-label">Doors Open</span><div class="conf-detail-val">4:00 PM</div></div>
+        <div><span class="conf-detail-label">Reunion Begins</span><div class="conf-detail-val">5:00 PM SHARP</div></div>
+        <div><span class="conf-detail-label">Venue</span><div class="conf-detail-val">Cloak &amp; Petal</div></div>
+        <div><span class="conf-detail-label">Party Size</span><div class="conf-detail-val" id="confParty">—</div></div>
+      </div>
+
+      <!-- WALLET PASS SECTION -->
+      <div class="wallet-section" id="walletSection" style="display:none;">
+        <h3>🎫 Your Event Ticket</h3>
+        <p>Save your ticket to your phone's wallet for easy access at the door.</p>
+        <div class="wallet-btns">
+          <a id="btn-apple" href="#" target="_blank"><img src="https://offercard.eatdrinklocals.com/appleWallet.png" alt="Add to Apple Wallet"></a>
+          <a id="btn-google" href="#" target="_blank"><img src="/googlewallet.png" alt="Save to Google Wallet"></a>
         </div>
       </div>
-      <div class="reminder-note">
+
+      <!-- PROCESSING STATUS -->
+      <div id="procStatus">
+        <div class="processing-strip" id="procSheet">
+          <div class="proc-spinner"></div>
+          <span class="proc-text active">Saving your RSVP...</span>
+        </div>
+        <div class="processing-strip" id="procWallet" style="display:none;">
+          <div class="proc-spinner"></div>
+          <span class="proc-text active">Generating event ticket...</span>
+        </div>
+        <div class="processing-strip" id="procEmail" style="display:none;">
+          <div class="proc-spinner"></div>
+          <span class="proc-text active">Sending confirmation email...</span>
+        </div>
+      </div>
+
+      <div class="reminder-note" style="margin-top:24px;">
         <p>🔔 <strong>We'll send you a reminder</strong> on the morning of June 2nd at 10:00 AM PST — by email and text (if you provided your number). No need to print anything, just show up!</p>
       </div>
     </div>
@@ -275,38 +280,20 @@
       <h2 class="section-title">What to <span class="accent">Expect</span></h2>
     </div>
     <div class="know-grid">
-      <div class="know-card">
-        <span class="know-icon">🚪</span>
-        <div class="know-title">Arrive Early</div>
-        <p class="know-text">Doors open at 4:00 PM. RSVPs get priority seating so come a bit early to grab your favorite spot before the reunion begins at 5PM sharp!</p>
-      </div>
-      <div class="know-card">
-        <span class="know-icon">📍</span>
-        <div class="know-title">Where We Are</div>
-        <p class="know-text">1953 India St, Little Italy, San Diego 92101. Street parking available on India St and surrounding blocks. We're easy to find — look for the cherry blossoms!</p>
-      </div>
-      <div class="know-card">
-        <span class="know-icon">🍣</span>
-        <div class="know-title">Food &amp; Drinks</div>
-        <p class="know-text">Our full menu is available all night — sushi, craft cocktails, sake, and whiskey. Happy Hour runs 4–6PM. It's the perfect pre-show ritual.</p>
-      </div>
+      <div class="know-card"><span class="know-icon">🚪</span><div class="know-title">Arrive Early</div><p class="know-text">Doors open at 4:00 PM. RSVPs get priority seating — come early to grab your spot before the reunion begins at 5PM sharp!</p></div>
+      <div class="know-card"><span class="know-icon">📍</span><div class="know-title">Where We Are</div><p class="know-text">1953 India St, Little Italy, San Diego 92101. Street parking available. Look for the cherry blossoms!</p></div>
+      <div class="know-card"><span class="know-icon">🍣</span><div class="know-title">Food &amp; Drinks</div><p class="know-text">Full menu all night — sushi, craft cocktails, sake, and whiskey. Happy Hour runs 4–6PM. The perfect pre-show ritual.</p></div>
     </div>
   </div>
 </section>
 
-<!-- SHARE -->
 <section class="share-section">
   <h2>Bring Your <span class="accent">Bravo Besties</span></h2>
-  <p>The more the merrier! Share this event with your most dramatic friends and make it a night to remember. Open seating available for walk-ins too.</p>
+  <p>Share this event with your most dramatic friends and make it a night to remember.</p>
   <div class="share-btns">
     <a href="/" class="share-btn back-home">← Back to Cloak &amp; Petal</a>
-    <a href="https://www.instagram.com/cloakandpetal/" target="_blank" class="share-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      Follow @CloakAndPetal
-    </a>
-    <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="share-btn">
-      🍽️ &nbsp;Also Reserve a Table
-    </a>
+    <a href="https://www.instagram.com/cloakandpetal/" target="_blank" class="share-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Follow @CloakAndPetal</a>
+    <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="share-btn">🍽️ &nbsp;Also Reserve a Table</a>
   </div>
 </section>
 
@@ -318,7 +305,193 @@
 <div id="cp-chat-bubble" onclick="openChat()"><img src="https://images.getkrowd.com/images/cloackIcon.png" alt="Chat"></div>
 <div id="cp-chat-frame"><iframe id="cp-chat-iframe" src="" allow="microphone"></iframe></div>
 
+<script>
+  // ═══════════════════════════════════════════
+  // READ URL PARAMS
+  // ═══════════════════════════════════════════
+  const params = new URLSearchParams(window.location.search);
+  const firstName = params.get('firstName') || '';
+  const lastName = params.get('lastName') || '';
+  const email = params.get('email') || '';
+  const phone = params.get('phone') || '';
+  const partySize = params.get('partySize') || '';
+  const specialRequests = params.get('specialRequests') || '';
+  const conf = params.get('conf') || 'CP-' + Math.floor(100000 + Math.random() * 900000);
+  const isReturn = params.get('confirmed') === 'true';
 
-  <script src="script.js"></script>
+  // Populate UI
+  document.getElementById('guestName').textContent = (firstName || 'Friend') + '!';
+  document.getElementById('confNumber').textContent = conf;
+  document.getElementById('confParty').textContent = partySize ? partySize + (partySize === '1' ? ' guest' : ' guests') : '—';
+
+  // Confetti
+  const colors = ['#C9A84C','#E8A0B0','#f36b83','#FAF8F5','#E8C97A','#c4607a'];
+  const wrap = document.getElementById('confettiWrap');
+  for (let i = 0; i < 80; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};width:${4+Math.random()*8}px;height:${4+Math.random()*8}px;animation-duration:${2.5+Math.random()*3}s;animation-delay:${Math.random()*2}s;border-radius:${Math.random()>0.5?'50%':'2px'};`;
+    wrap.appendChild(el);
+  }
+
+  // ═══════════════════════════════════════════
+  // STATUS HELPERS
+  // ═══════════════════════════════════════════
+  function markDone(id, msg) {
+    const el = document.getElementById(id);
+    el.classList.add('done');
+    el.innerHTML = `<span class="proc-check">✓</span><span class="proc-text" style="color:#4CAF50;">${msg}</span>`;
+  }
+  function markError(id, msg) {
+    const el = document.getElementById(id);
+    el.classList.add('error');
+    el.innerHTML = `<span class="proc-text" style="color:var(--rose);">⚠ ${msg}</span>`;
+  }
+  function showStep(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  // ═══════════════════════════════════════════
+  // MAIN PROCESSING (runs on first visit only)
+  // ═══════════════════════════════════════════
+  async function processRSVP() {
+    if (isReturn || !firstName || !email) {
+      // Return visit or missing data — just show confirmation, hide processing
+      document.getElementById('procStatus').style.display = 'none';
+      return;
+    }
+
+    const confirmPageUrl = window.location.origin + '/summer-house-reunion-thank-you?firstName=' + encodeURIComponent(firstName) + '&conf=' + encodeURIComponent(conf) + '&confirmed=true';
+
+    // ── STEP 1: Create contact + Write to Google Sheet via Anthropic API + MCP ──
+    try {
+      const res1 = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 2000,
+          system: `You are a backend processor. Execute ALL steps silently, then respond with ONLY a JSON object. No extra text.
+
+STEP 1: Call create_contact with: name="${firstName} ${lastName}", email="${email}", phone="${phone || ''}", widgetId=53946577, notes="RSVP: Summer House Reunion June 2 | Party: ${partySize} | Conf: ${conf}"
+
+STEP 2: Call manage_sheet_row with action="append", spreadsheetId="1cwbzTkxiIrS-dvGkE0_vcGyfgjq_11a12MP1VlPqmEI", sheetName="RSVPs", data={"Timestamp":"${new Date().toISOString()}","First Name":"${firstName}","Last Name":"${lastName}","Email":"${email}","Phone":"${phone}","Party Size":"${partySize}","Special Requests":"${specialRequests}","Confirmation":"${conf}"}
+
+STEP 3: Call create_broadcast with channel="email", name="Reunion Confirmation - ${firstName} ${lastName}", subject="🌸 You're In! Summer House Reunion — ${conf}", extraEmails=["${email}"], extraEmailsWidgetId=53946577, htmlContent="<html><body style='margin:0;padding:0;background:#080608;font-family:Helvetica,Arial,sans-serif;'><table width='100%' cellpadding='0' cellspacing='0' style='background:#080608;'><tr><td align='center' style='padding:40px 20px;'><table width='600' cellpadding='0' cellspacing='0' style='max-width:600px;width:100%;'><tr><td align='center' style='padding-bottom:24px;'><img src='https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png' width='120' style='display:block;'><p style='color:#C9A84C;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;margin:12px 0 0;'>Little Italy · San Diego</p></td></tr><tr><td><img src='https://krowdimg.b-cdn.net/clients/cloakpedal/reunion.png' width='600' style='display:block;width:100%;'></td></tr><tr><td style='background:#111013;padding:40px 36px;'><h1 style='font-family:Georgia,serif;font-size:32px;font-weight:300;font-style:italic;color:#FAF8F5;margin:0 0 6px;'>You're In, ${firstName}! 🌸</h1><p style='color:#C9A84C;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;margin:0 0 20px;'>Confirmation: ${conf}</p><p style='color:rgba(250,248,245,0.75);font-size:15px;line-height:1.8;margin:0 0 24px;'>Your spot at the Summer House Reunion watch party is confirmed!</p><table style='background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);width:100%;margin-bottom:28px;'><tr><td style='padding:20px 24px;'><p style='margin:0 0 8px;color:#FAF8F5;font-size:15px;'>📅 <strong>Tuesday, June 2nd, 2026</strong></p><p style='margin:0 0 8px;color:#FAF8F5;font-size:15px;'>🚪 Doors: <strong>4:00 PM</strong></p><p style='margin:0 0 8px;color:#FAF8F5;font-size:15px;'>📺 Reunion: <strong>5:00 PM SHARP</strong></p><p style='margin:0 0 8px;color:#FAF8F5;font-size:15px;'>👥 Party Size: <strong>${partySize}</strong></p><p style='margin:0;color:#FAF8F5;font-size:15px;'>📍 <strong>1953 India St, Little Italy</strong></p></td></tr></table><a href='${confirmPageUrl}' style='display:inline-block;background:#C9A84C;color:#080608;padding:16px 36px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;'>View Confirmation →</a></td></tr><tr><td style='background:#050405;border-top:1px solid rgba(201,168,76,0.1);padding:28px 36px;text-align:center;'><p style='color:rgba(250,248,245,0.3);font-size:11px;margin:0;'>1953 India St, Little Italy, San Diego 92101 · (619) 501-5505</p></td></tr></table></td></tr></table></body></html>"
+
+Then IMMEDIATELY call send_broadcast with the broadcastId returned from step 3, channel="email" (no scheduledAt — send now).
+
+Respond ONLY with: {"success":true,"contactId":<number>,"broadcastId":<number>}`,
+          messages: [{ role: 'user', content: 'Process this RSVP now.' }],
+          mcp_servers: [{ type: 'url', url: 'https://paymegpt.com/mcp', name: 'marketing-mcp' }]
+        })
+      });
+
+      const data1 = await res1.json();
+      let result1 = { success: false, contactId: null };
+      const textBlock1 = data1.content?.find(b => b.type === 'text');
+      if (textBlock1) {
+        try { result1 = JSON.parse(textBlock1.text.replace(/```json|```/g, '').trim()); } catch(e) {}
+      }
+      // Also try to extract contactId from MCP tool results
+      if (!result1.contactId) {
+        const toolResults = data1.content?.filter(b => b.type === 'mcp_tool_result') || [];
+        for (const tr of toolResults) {
+          try {
+            const txt = tr.content?.[0]?.text || '';
+            const parsed = JSON.parse(txt);
+            if (parsed.id && !result1.contactId) result1.contactId = parsed.id;
+          } catch(e) {}
+        }
+      }
+
+      markDone('procSheet', 'RSVP saved & confirmation email sent!');
+      const contactId = result1.contactId;
+
+      // ── STEP 2: Generate Wallet Pass via Anthropic API + MCP ──
+      if (contactId) {
+        showStep('procWallet');
+        try {
+          const res2 = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              model: 'claude-sonnet-4-20250514',
+              max_tokens: 1000,
+              system: `You are a wallet pass generator. Check if any wallet-related tools are available. If there is a tool to create/issue wallet pass cards, use it with:
+- Program ID: 187
+- customerName: "${firstName} ${lastName}"
+- customerEmail: "${email}"
+- customerPhone: "${phone}"
+- contactId: ${contactId}
+
+If a wallet tool exists and succeeds, respond with: {"success":true,"appleUrl":"<the apple pkpass URL>","googleUrl":"<the google save URL>"}
+If no wallet tool is available, respond with: {"success":false,"reason":"no wallet tool available"}`,
+              messages: [{ role: 'user', content: 'Generate wallet pass now.' }],
+              mcp_servers: [{ type: 'url', url: 'https://paymegpt.com/mcp', name: 'marketing-mcp' }]
+            })
+          });
+
+          const data2 = await res2.json();
+          let walletResult = { success: false };
+          const textBlock2 = data2.content?.find(b => b.type === 'text');
+          if (textBlock2) {
+            try { walletResult = JSON.parse(textBlock2.text.replace(/```json|```/g, '').trim()); } catch(e) {}
+          }
+          // Also check MCP tool results for wallet data
+          const toolResults2 = data2.content?.filter(b => b.type === 'mcp_tool_result') || [];
+          for (const tr of toolResults2) {
+            try {
+              const txt = tr.content?.[0]?.text || '';
+              const parsed = JSON.parse(txt);
+              if (parsed.googleSaveUrl) {
+                walletResult.success = true;
+                walletResult.googleUrl = parsed.googleSaveUrl;
+                if (parsed.card?.serial) {
+                  walletResult.appleUrl = 'https://paymegpt.com/api/wallet/cards/' + parsed.card.serial + '/pkpass';
+                }
+              }
+            } catch(e) {}
+          }
+
+          if (walletResult.success && (walletResult.appleUrl || walletResult.googleUrl)) {
+            if (walletResult.appleUrl) document.getElementById('btn-apple').href = walletResult.appleUrl;
+            if (walletResult.googleUrl) document.getElementById('btn-google').href = walletResult.googleUrl;
+            document.getElementById('walletSection').style.display = 'block';
+            markDone('procWallet', 'Event ticket ready — save to your wallet!');
+          } else {
+            markError('procWallet', 'Wallet pass unavailable — no worries, you\'re still confirmed!');
+          }
+        } catch(e) {
+          console.error('Wallet error:', e);
+          markError('procWallet', 'Wallet pass unavailable — you\'re still confirmed!');
+        }
+      }
+
+    } catch(err) {
+      console.error('Processing error:', err);
+      markError('procSheet', 'Processing encountered an issue — but you\'re confirmed! Ref: ' + conf);
+    }
+  }
+
+  // Run on load
+  document.addEventListener('DOMContentLoaded', processRSVP);
+
+  // Chat
+  let chatLoaded = false;
+  function openChat() {
+    const frame = document.getElementById('cp-chat-frame');
+    const iframe = document.getElementById('cp-chat-iframe');
+    if (!frame.classList.contains('open')) {
+      if (!chatLoaded) { iframe.src = 'https://paymegpt.com/agents/53946577/embed'; chatLoaded = true; }
+      frame.classList.add('open');
+    } else { frame.classList.remove('open'); }
+  }
+  document.addEventListener('click', function(e) {
+    const frame = document.getElementById('cp-chat-frame');
+    const bubble = document.getElementById('cp-chat-bubble');
+    if (!bubble.contains(e.target) && !frame.contains(e.target)) frame.classList.remove('open');
+  });
+</script>
 </body>
 </html>
