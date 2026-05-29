@@ -144,6 +144,7 @@
 (function(){
   var slug='NThxxqWSzx';
   var apiBase='https://paymegpt.com';
+  var successSubtext='';var successBtnLabel='Continue';var successBtnColor='#16a34a';var successRedirect='';
   function findEmail(){
     var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
     for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
@@ -173,9 +174,10 @@
     if(!amountCents||amountCents<100){alert('Amount must be at least $1.00');return Promise.reject('invalid_amount');}
     if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
     var successBase=window.location.href.split('?')[0];
+    var __pLoc=(document.documentElement.lang||navigator.language||'en');
     return fetch(apiBase+'/api/landing-pages/public/'+slug+'/payment/checkout',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,name:customerName,amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
+      body:JSON.stringify({email:email,name:customerName,amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,locale:__pLoc,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
     }).then(function(r){return r.json();}).then(function(d){
       if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
       else{alert(d.error||'Failed to process payment');throw new Error(d.error);}
@@ -188,8 +190,12 @@
       var pName=urlParams.get('product')||'your item';
       var overlay=document.createElement('div');overlay.id='payment-success-overlay';
       overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
-      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">Thank you for purchasing '+pName.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'.</p><button onclick="document.getElementById(\'payment-success-overlay\').remove();window.history.replaceState({},\'\',window.location.pathname);" style="padding:12px 32px;font-size:16px;font-weight:600;background:#16a34a;color:white;border:none;border-radius:8px;cursor:pointer;">Continue</button></div>';
+      function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+      var subTxt=successSubtext||('Thank you for purchasing '+pName+'.');
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">'+esc(subTxt)+'</p><button id="lp-pay-success-btn" style="padding:12px 32px;font-size:16px;font-weight:600;background:'+successBtnColor+';color:white;border:none;border-radius:8px;cursor:pointer;">'+esc(successBtnLabel)+'</button></div>';
       document.body.appendChild(overlay);
+      var pBtn=document.getElementById('lp-pay-success-btn');
+      if(pBtn){pBtn.addEventListener('click',function(){if(successRedirect){window.location.href=successRedirect;}else{overlay.remove();window.history.replaceState({},'',window.location.pathname);}});}
     }
   });
 })();
@@ -198,8 +204,6 @@
 <body>
 
 <div class="nav-wrapper" id="navWrapper">
-
-  <!-- TOP BAR -->
   <div class="nav-top">
     <div class="nav-top-social">
       <a href="https://www.facebook.com/CloakAndPetal/" target="_blank" title="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
@@ -219,19 +223,16 @@
     </div>
   </div>
 
-  <!-- BOTTOM BAR — logo in flow, groups hug it at 22px -->
   <div class="nav-bottom">
-
-    <!-- LEFT GROUP -->
     <ul class="nav-group">
-      <li class="nav-item"><a href="#" class="active">Home</a></li>
+      <li class="nav-item"><a href="/" class="active">Home</a></li>
       <li class="nav-item">
-        <a href="#">About <span class="arrow">▾</span></a>
+        <a href="/about-us">About <span class="arrow">▾</span></a>
         <div class="nav-dropdown">
-          <a href="https://cloakandpetal.com/about-us-2/" target="_blank">About Us</a>
-          <a href="https://paymegpt.com/p/Ax9QZW" target="_blank">Press &amp; Awards ⭐</a>
+          <a href="/about-us">About Us</a>
+          <a href="/cloak-and-petal-press-san-diego-restaurant">Press &amp; Awards ⭐</a>
           <a href="https://cloakandpetal.com/contact-cloak-and-petal/" target="_blank">Contact Us</a>
-          <a href="https://cloakandpetal.com/pages/reservations-little-italy-san-diego/" target="_blank">Reservations</a>
+          <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank">Reservations</a>
           <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
         </div>
       </li>
@@ -244,12 +245,10 @@
       </li>
     </ul>
 
-    <!-- LOGO — sits in flow, 22px margin each side -->
-    <a href="#" class="nav-logo-wrap">
+    <a href="/" class="nav-logo-wrap">
       <img src="https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png" alt="Cloak & Petal Little Italy">
     </a>
 
-    <!-- RIGHT GROUP -->
     <ul class="nav-group">
       <li class="nav-item">
         <a href="#">Menus <span class="arrow">▾</span></a>
@@ -270,12 +269,11 @@
   </div>
 </div>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#">Home</a>
+  <a href="/" class="active">Home</a>
   <div class="mob-section">About</div>
-  <a href="https://cloakandpetal.com/about-us-2/" target="_blank">About Us</a>
-  <a href="https://paymegpt.com/p/Ax9QZW" target="_blank">Press &amp; Awards ⭐</a>
+  <a href="/about-us">About Us</a>
+  <a href="/cloak-and-petal-press-san-diego-restaurant">Press &amp; Awards ⭐</a>
   <a href="https://cloakandpetal.com/contact-cloak-and-petal/" target="_blank">Contact Us</a>
   <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
   <div class="mob-section">Parties</div>
@@ -291,7 +289,6 @@
   <a href="https://www.opentable.com/r/cloak-and-petal-san-diego" target="_blank" class="mob-reserve">Reservations</a>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <video class="hero-video" autoplay muted loop playsinline>
     <source src="https://cloakandpetal.com/wp-content/uploads/2025/12/CP-Brand-Vid-25.mp4" type="video/mp4">
@@ -310,7 +307,6 @@
   <div class="scroll-hint"><div class="scroll-line"></div><span>Discover</span></div>
 </section>
 
-<!-- AWARDS STRIP -->
 <div class="awards-strip">
   <div class="award-badge"><span class="icon">⭐</span><div><strong>MICHELIN Guide</strong>Recognized Restaurant</div></div>
   <div class="awards-div"></div>
@@ -318,22 +314,20 @@
   <div class="awards-div"></div>
   <div class="award-badge"><span class="icon">🏆</span><div><strong>Best Appetizer 2025</strong>Uptown/Downtown Best Of</div></div>
   <div class="awards-div"></div>
-  <a href="https://paymegpt.com/p/Ax9QZW" target="_blank" class="awards-cta">View All Awards →</a>
+  <a href="/cloak-and-petal-press-san-diego-restaurant" class="awards-cta">View All Awards →</a>
 </div>
 
-<!-- GC BANNER -->
 <div class="gc-banner">
   <p>The gift that says everything — <em>Cloak &amp; Petal Gift Cards</em>, always the right choice.</p>
   <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards?utmCampaign=onlineOrdering" target="_blank" class="btn-primary">Gift Cards</a>
 </div>
 
-<!-- INTRO -->
 <section class="intro" id="about">
   <div class="intro-text">
     <span class="section-label">Come Unwind Your Soul</span>
     <h2 class="section-title">Beneath the Levels of <span class="accent">Ordinary Life</span></h2>
     <p class="intro-body">Journey into a place of both intimacy and companionship, where family and friends gather beneath blooming cherry blossoms to savor sushi, craft cocktails, and fellowship. A sanctuary carved from the heart of Little Italy.</p>
-    <a href="https://cloakandpetal.com/about-us-2/" class="btn-ghost" style="max-width:200px;width:auto;padding:14px 28px;">Our Story</a>
+    <a href="/about-us" class="btn-ghost" style="max-width:200px;width:auto;padding:14px 28px;">Our Story</a>
   </div>
   <div class="intro-images">
     <div class="img-stack img-a"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/255403570_3037318236539895_1577337030238411525_n.jpg" alt="sushi" loading="lazy"></div>
@@ -341,7 +335,6 @@
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section class="experience" id="menus">
   <span class="section-label">An Experience You're Sure to Remember</span>
   <h2 class="section-title">Formal Dining. <span class="accent">Effortless Atmosphere.</span></h2>
@@ -353,7 +346,6 @@
   </div>
 </section>
 
-<!-- GALLERY -->
 <div class="gallery-strip">
   <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/254164674_3038790869725965_4100971500022566362_n-2.jpg" alt="" loading="lazy"></div>
   <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/262793360_3052942178310834_7517131027030412740_n-2.jpg" alt="" loading="lazy"></div>
@@ -361,7 +353,6 @@
   <div class="gitem"><img src="https://cloakandpetal.com/wp-content/uploads/2022/04/271355861_3081550932116625_7675483469406211570_n-2.jpg" alt="" loading="lazy"></div>
 </div>
 
-<!-- SHIBUYA -->
 <section class="shibuya" id="shibuya">
   <div class="shibuya-visual">
     <div class="shibuya-logo"><img src="https://cloakandpetal.com/wp-content/uploads/2022/05/shibuya-scaled-1-300x93.jpg" alt="Shibuya Nights"></div>
@@ -380,7 +371,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer-section">
   <div class="footer-block">
     <h4>Hours</h4>
@@ -410,7 +400,7 @@
       <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/v3/?mode=fulfillment" target="_blank">Order Online</a>
       <a href="https://cloakandpetal.com/food-menus/dine-in-menus/" target="_blank">Dine-In Menu</a>
       <a href="https://cloakandpetal.com/happy-hour/" target="_blank">Happy Hour</a>
-      <a href="https://paymegpt.com/p/Ax9QZW" target="_blank">Press &amp; Awards ⭐</a>
+      <a href="/cloak-and-petal-press-san-diego-restaurant">Press &amp; Awards ⭐</a>
       <a href="https://www.toasttab.com/catering/cloak-and-petal-1953-india-st" target="_blank">Sushi Platters To Go</a>
       <a href="https://cloakandpetal.com/private-events-san-diego-little-italy/" target="_blank">Private Events</a>
       <a href="https://www.toasttab.com/cloak-and-petal-1953-india-st/giftcards" target="_blank">Gift Cards</a>
@@ -422,14 +412,12 @@
   <p><a href="https://cloakandpetal.com/statement-of-ada-compliance/">ADA Compliance</a></p>
 </div>
 
-<!-- VIP -->
 <div id="vip-callout">
   <button class="vip-close" onclick="closeVip()">✕</button>
   <div class="vip-emoji">🌸</div>
   <div class="vip-text"><p>Welcome! Join or access our <strong>Cloak VIP</strong> club here, or ask me anything!</p></div>
 </div>
 
-<!-- CHAT -->
 <div id="cp-chat-bubble" onclick="openChat()"><img src="https://images.getkrowd.com/images/cloackIcon.png" alt="Chat"></div>
 <div id="cp-chat-frame"><iframe id="cp-chat-iframe" src="" allow="microphone"></iframe></div>
 
