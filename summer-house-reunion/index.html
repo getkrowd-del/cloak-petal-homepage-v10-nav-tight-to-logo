@@ -366,28 +366,28 @@
       <h3>Secure Your Spot 🌸</h3>
       <p class="form-sub">Free RSVP · Priority seating guaranteed · Reminder sent June 2nd at 10AM</p>
 
-      <div id="formContainer">
+      <form id="formContainer" onsubmit="return false;">
         <div class="form-row">
           <div class="form-group">
             <label>First Name *</label>
-            <input type="text" id="firstName" placeholder="First name" required>
+            <input type="text" id="firstName" name="firstName" placeholder="First name" required>
           </div>
           <div class="form-group">
             <label>Last Name *</label>
-            <input type="text" id="lastName" placeholder="Last name" required>
+            <input type="text" id="lastName" name="lastName" placeholder="Last name" required>
           </div>
         </div>
         <div class="form-group">
           <label>Email Address *</label>
-          <input type="email" id="email" placeholder="you@email.com" required>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required>
         </div>
         <div class="form-group">
           <label>Phone Number (for SMS reminder)</label>
-          <input type="tel" id="phone" placeholder="+1 (619) 000-0000">
+          <input type="tel" id="phone" name="phone" placeholder="+1 (619) 000-0000">
         </div>
         <div class="form-group">
           <label>Party Size *</label>
-          <select id="partySize" required>
+          <select id="partySize" name="partySize" required>
             <option value="" disabled selected>How many guests?</option>
             <option value="1">Just me</option>
             <option value="2">2 people</option>
@@ -399,12 +399,12 @@
         </div>
         <div class="form-group">
           <label>Special Requests (optional)</label>
-          <textarea id="specialRequests" placeholder="Birthday celebration, dietary needs, accessibility..."></textarea>
+          <textarea id="specialRequests" name="specialRequests" placeholder="Birthday celebration, dietary needs, accessibility..."></textarea>
         </div>
         <p id="formError" class="form-error">Please fill in all required fields.</p>
-        <button class="form-submit" id="submitBtn" onclick="submitRSVP()">RSVP — Reserve My Spot</button>
+        <button class="form-submit" id="submitBtn" type="submit" onclick="return submitRSVP()">RSVP — Reserve My Spot</button>
         <p class="form-note">By submitting you agree to receive a reminder on June 2nd. Walk-ins also welcome — first come, first served.</p>
-      </div>
+      </form>
 
       <div class="form-loading" id="formLoading">
         <div style="font-size:28px;margin-bottom:12px;">🌸</div>
@@ -412,6 +412,8 @@
       </div>
     </div>
   </div>
+
+
 </section>
 
 <!-- ══ GALLERY ══ -->
@@ -594,5 +596,6 @@ Add to Google Sheet, create contact, add to both reminder broadcasts.`
     a.addEventListener('click', e => { e.preventDefault(); document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   });
 </script>
+  <script src="script.js"></script>
 </body>
 </html>
