@@ -16,10 +16,7 @@
   .conf-details{display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left}
   .conf-detail-label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;display:block}
   .conf-detail-val{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--white)}
-
-  /* TICKET SECTION */
   .ticket-section{margin-top:28px}
-  /* Loading state */
   .ticket-loading{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:24px;text-align:center}
   .ticket-loading-inner{display:flex;flex-direction:column;align-items:center;gap:14px}
   .ticket-spinner-wrap{position:relative;width:48px;height:48px}
@@ -28,18 +25,15 @@
   .ticket-countdown{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold)}
   .ticket-loading p{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
   .ticket-loading .ticket-sub{font-size:11px;letter-spacing:.06em;text-transform:none;color:var(--text-muted)}
-  /* Ready state */
   .ticket-ready{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.25);padding:28px;text-align:center;display:none}
   .ticket-ready h3{font-family:'Cinzel',serif;font-size:11px;font-weight:400;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
   .ticket-ready p{font-size:13px;color:var(--text-muted);margin-bottom:20px;line-height:1.6}
   .wallet-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
   .wallet-btns a{transition:transform .2s;display:inline-block}.wallet-btns a:hover{transform:scale(1.05)}
   .wallet-btns img{height:52px;width:auto;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.4);display:block}
-  /* Failed state */
   .ticket-failed{background:rgba(243,107,131,0.05);border:1px solid rgba(243,107,131,0.2);padding:20px;text-align:center;display:none}
   .ticket-failed p{font-size:13px;color:var(--text-muted);line-height:1.7}
   .ticket-failed strong{color:var(--bravo)}
-
   .reminder-note{background:rgba(232,160,176,0.08);border-left:3px solid var(--bravo);padding:16px 20px;margin-top:24px;text-align:left}.reminder-note p{font-size:13px;line-height:1.7;color:rgba(250,248,245,0.78)}.reminder-note strong{color:var(--bravo)}
   .section-label{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);margin-bottom:14px;display:block}.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,48px);font-weight:300;font-style:italic;color:var(--white)}.section-title .accent{color:var(--gold)}
   .know-section{background:var(--charcoal);border-top:1px solid rgba(201,168,76,0.1);border-bottom:1px solid rgba(201,168,76,0.1);padding:80px 40px}.know-inner{max-width:1000px;margin:0 auto}.know-header{text-align:center;margin-bottom:56px}.know-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.know-card{background:rgba(255,255,255,0.03);padding:36px 28px}.know-icon{font-size:28px;margin-bottom:14px;display:block}.know-title{font-family:'Cinzel',serif;font-size:10px;font-weight:400;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}.know-text{font-size:13.5px;line-height:1.75;color:var(--text-muted)}
