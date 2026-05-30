@@ -1,15 +1,7 @@
-function submitRSVP() {
-    const firstName = document.getElementById('firstName').value.trim();
-    const lastName = document.getElementById('lastName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const partySize = document.getElementById('partySize').value;
-
-    if (!firstName || !lastName || !email || !partySize) {
-      document.getElementById('formError').style.display = 'block';
-      return false;
-    } else {
-      document.getElementById('formError').style.display = 'none';
-      document.getElementById('formLoading').style.display = 'block';
-      return true;
-    }
-  }
+function updateCountdown(){var t=new Date('2026-06-02T17:00:00-07:00'),n=new Date(),d=t-n;if(d<=0){document.getElementById('countdown').innerHTML='<div style="font-size:18px;letter-spacing:0.2em;color:var(--bravo);text-transform:uppercase;padding:16px">Happening NOW!</div>';return}var dd=Math.floor(d/864e5),hh=Math.floor(d%864e5/36e5),mm=Math.floor(d%36e5/6e4),ss=Math.floor(d%6e4/1e3);document.getElementById('cd-d').textContent=String(dd).padStart(2,'0');document.getElementById('cd-h').textContent=String(hh).padStart(2,'0');document.getElementById('cd-m').textContent=String(mm).padStart(2,'0');document.getElementById('cd-s').textContent=String(ss).padStart(2,'0')}updateCountdown();setInterval(updateCountdown,1000);
+function submitRSVP(){var a=document.getElementById('firstName').value.trim(),b=document.getElementById('lastName').value.trim(),c=document.getElementById('email').value.trim(),d=document.getElementById('phone').value.trim(),e=document.getElementById('partySize').value,f=document.getElementById('specialRequests').value.trim();if(!a||!b||!c||!e){document.getElementById('formError').style.display='block';return}document.getElementById('formError').style.display='none';document.getElementById('submitBtn').disabled=true;document.getElementById('formContainer').style.display='none';document.getElementById('formLoading').style.display='block';var g='CP-'+Math.floor(1e5+Math.random()*9e5);var p=new URLSearchParams({firstName:a,lastName:b,email:c,phone:d,partySize:e,specialRequests:f,conf:g});window.location.href='/summer-house-reunion-thank-you?'+p.toString()}
+function toggleMobileMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
+document.addEventListener('click',function(e){var m=document.getElementById('mobileMenu'),b=document.querySelector('.nav-hamburger'),f=document.getElementById('cp-chat-frame'),bu=document.getElementById('cp-chat-bubble'),c=document.getElementById('vip-callout');if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target))m.classList.remove('open');if(!bu.contains(e.target)&&!f.contains(e.target)&&!c.contains(e.target))f.classList.remove('open')});
+function closeVip(){document.getElementById('vip-callout').classList.add('hidden')}setTimeout(closeVip,14000);
+var chatLoaded=false;function openChat(){var f=document.getElementById('cp-chat-frame'),i=document.getElementById('cp-chat-iframe');closeVip();if(!f.classList.contains('open')){if(!chatLoaded){i.src='https://paymegpt.com/agents/53946577/embed';chatLoaded=true}f.classList.add('open')}else{f.classList.remove('open')}}
+document.querySelectorAll('a[href="#rsvp"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();document.getElementById('rsvp').scrollIntoView({behavior:'smooth',block:'start'})})});
