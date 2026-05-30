@@ -203,7 +203,6 @@
 </script>  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
 <div class="nav-wrapper"><div class="nav-bottom"><a href="/" class="nav-logo-wrap"><img src="https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png" alt="Cloak &amp; Petal"></a></div></div>
 <div class="confetti-wrap" id="confettiWrap"></div>
 
@@ -229,10 +228,7 @@
         <div><span class="conf-detail-label">Party Size</span><div class="conf-detail-val" id="confParty">—</div></div>
       </div>
 
-      <!-- TICKET SECTION -->
       <div class="ticket-section" id="ticketSection">
-
-        <!-- Loading / countdown -->
         <div class="ticket-loading" id="ticketLoading">
           <div class="ticket-loading-inner">
             <div class="ticket-spinner-wrap">
@@ -240,11 +236,9 @@
               <div class="ticket-countdown" id="ticketCountdown">8</div>
             </div>
             <p>Generating your event ticket...</p>
-            <p class="ticket-sub">Hang tight — your Apple &amp; Google Wallet pass will appear here in just a moment.</p>
+            <p class="ticket-sub">Your Apple &amp; Google Wallet pass will appear here in a moment.</p>
           </div>
         </div>
-
-        <!-- Wallet buttons — shown once ticket is ready -->
         <div class="ticket-ready" id="ticketReady">
           <h3>🎫 Your Event Ticket is Ready</h3>
           <p>Save it to your phone's wallet for instant check-in at the door.</p>
@@ -253,16 +247,13 @@
             <a id="btnGoogle" href="#" target="_blank"><img src="https://krowdimg.b-cdn.net/googlewallet.png" alt="Save to Google Wallet"></a>
           </div>
         </div>
-
-        <!-- Fallback if ticket gen fails -->
         <div class="ticket-failed" id="ticketFailed">
-          <p>Your ticket is being processed — check your <strong>confirmation email</strong> for the wallet download link, or try refreshing this page.</p>
+          <p>Ticket still processing — check your <strong>confirmation email</strong> for the wallet link, or refresh this page.</p>
         </div>
-
       </div>
 
       <div class="reminder-note">
-        <p>🔔 <strong>Reminder on the way!</strong> We'll text and email you on the morning of June 2nd at 10AM PST. Confirmation email is also en route right now!</p>
+        <p>🔔 <strong>Reminder coming June 2nd</strong> at 10AM PST. Confirmation email is on its way!</p>
       </div>
     </div>
   </div>
@@ -272,16 +263,16 @@
   <div class="know-inner">
     <div class="know-header"><span class="section-label">Before You Arrive</span><h2 class="section-title">What to <span class="accent">Expect</span></h2></div>
     <div class="know-grid">
-      <div class="know-card"><span class="know-icon">🚪</span><div class="know-title">Arrive Early</div><p class="know-text">Doors open at 4:00 PM. RSVPs get priority seating — come early to grab your spot before the reunion begins at 5PM sharp!</p></div>
+      <div class="know-card"><span class="know-icon">🚪</span><div class="know-title">Arrive Early</div><p class="know-text">Doors open at 4:00 PM. RSVPs get priority seating — come early to grab your spot before 5PM sharp!</p></div>
       <div class="know-card"><span class="know-icon">📍</span><div class="know-title">Where We Are</div><p class="know-text">1953 India St, Little Italy, San Diego 92101. Street parking available. Look for the cherry blossoms!</p></div>
-      <div class="know-card"><span class="know-icon">🍣</span><div class="know-title">Food &amp; Drinks</div><p class="know-text">Full menu all night — sushi, craft cocktails, sake, and whiskey. Happy Hour runs 4–6PM.</p></div>
+      <div class="know-card"><span class="know-icon">🍣</span><div class="know-title">Food &amp; Drinks</div><p class="know-text">Full menu all night — sushi, craft cocktails, sake, and whiskey. Happy Hour 4–6PM.</p></div>
     </div>
   </div>
 </section>
 
 <section class="share-section">
   <h2>Bring Your <span class="accent">Bravo Besties</span></h2>
-  <p>Share this event with your most dramatic friends and make it a night to remember.</p>
+  <p>Share with your most dramatic friends and make it a night to remember.</p>
   <div class="share-btns">
     <a href="/" class="share-btn back-home">← Back to Cloak &amp; Petal</a>
     <a href="https://www.instagram.com/cloakandpetal/" target="_blank" class="share-btn">📸 Follow @CloakAndPetal</a>
@@ -294,15 +285,19 @@
 <div id="cp-chat-frame"><iframe id="cp-chat-iframe" src="" allow="microphone"></iframe></div>
 
 <script>
-  var params     = new URLSearchParams(window.location.search);
-  var firstName  = params.get('firstName') || params.get('name') || '';
-  var lastName   = params.get('lastName') || '';
-  var email      = params.get('email') || '';
-  var phone      = params.get('phone') || '';
-  var partySize  = params.get('partySize') || params.get('party') || '';
-  var specialReq = params.get('specialRequests') || '';
-  var conf       = params.get('conf') || 'CP-' + Math.floor(1e5 + Math.random() * 9e5);
-  var isReturn   = params.get('confirmed') === 'true';
+  var WALLET_KEY = 'api_9856c03ec43ec6dfa2dacefc89634bf1db0e2d90528c9027d4bcd9efef0ce938';
+  var WALLET_URL = 'https://paymegpt.com/api/wallet/programs/187/cards';
+  var WEBHOOK    = 'https://paymegpt.com/api/webhooks/flow/3350/1c7d5910428bdd760fb15a75e0184c7304d6c60709c9997947b0d4d85cab8fb3';
+
+  var params    = new URLSearchParams(window.location.search);
+  var firstName = params.get('firstName') || params.get('name') || '';
+  var lastName  = params.get('lastName') || '';
+  var email     = params.get('email') || '';
+  var phone     = params.get('phone') || '';
+  var partySize = params.get('partySize') || params.get('party') || '';
+  var specReq   = params.get('specialRequests') || '';
+  var conf      = params.get('conf') || 'CP-' + Math.floor(1e5 + Math.random() * 9e5);
+  var isReturn  = params.get('confirmed') === 'true';
 
   document.getElementById('guestName').textContent  = (firstName || 'Friend') + '!';
   document.getElementById('confNumber').textContent = conf;
@@ -310,25 +305,21 @@
 
   // Confetti
   var colors = ['#C9A84C','#E8A0B0','#f36b83','#FAF8F5','#E8C97A','#c4607a'];
-  var wrap = document.getElementById('confettiWrap');
+  var cw = document.getElementById('confettiWrap');
   for (var i = 0; i < 80; i++) {
     var el = document.createElement('div');
     el.className = 'confetti-piece';
     el.style.cssText = 'left:'+Math.random()*100+'%;background:'+colors[Math.floor(Math.random()*colors.length)]+';width:'+(4+Math.random()*8)+'px;height:'+(4+Math.random()*8)+'px;animation-duration:'+(2.5+Math.random()*3)+'s;animation-delay:'+Math.random()*2+'s;border-radius:'+(Math.random()>.5?'50%':'2px')+';';
-    wrap.appendChild(el);
+    cw.appendChild(el);
   }
 
-  // Show wallet buttons
   function showWallet(appleUrl, googleUrl) {
     document.getElementById('ticketLoading').style.display = 'none';
     document.getElementById('ticketFailed').style.display  = 'none';
     if (appleUrl)  document.getElementById('btnApple').href  = appleUrl;
     if (googleUrl) document.getElementById('btnGoogle').href = googleUrl;
-    if (appleUrl || googleUrl) {
-      document.getElementById('ticketReady').style.display = 'block';
-    } else {
-      document.getElementById('ticketFailed').style.display = 'block';
-    }
+    document.getElementById('ticketReady').style.display = (appleUrl || googleUrl) ? 'block' : 'none';
+    if (!appleUrl && !googleUrl) document.getElementById('ticketFailed').style.display = 'block';
   }
 
   function showFailed() {
@@ -336,92 +327,65 @@
     document.getElementById('ticketFailed').style.display  = 'block';
   }
 
-  // Fetch wallet card from API (deduplicates on email)
-  function fetchWalletCard() {
-    return fetch('https://paymegpt.com/api/wallet/programs/187/cards', {
+  function fetchCard() {
+    return fetch(WALLET_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer krwd_b6b39255876319e46e4bbdf3d8687e3df5e9e86fd6137df25a59e3061f5'
-      },
-      body: JSON.stringify({
-        customerName:  (firstName + ' ' + lastName).trim(),
-        customerEmail: email,
-        customerPhone: phone
-      })
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + WALLET_KEY },
+      body: JSON.stringify({ customerName: (firstName + ' ' + lastName).trim(), customerEmail: email, customerPhone: phone })
     })
     .then(function(r){ return r.json(); })
-    .then(function(data){
-      if (data && data.card && data.card.serial) {
-        var appleUrl  = 'https://paymegpt.com/api/wallet/cards/' + data.card.serial + '/pkpass';
-        var googleUrl = data.googleSaveUrl || '';
-        showWallet(appleUrl, googleUrl);
+    .then(function(d){
+      if (d && d.card && d.card.serial) {
+        showWallet('https://paymegpt.com/api/wallet/cards/' + d.card.serial + '/pkpass', d.googleSaveUrl || '');
       } else {
         showFailed();
       }
     })
-    .catch(function(){ showFailed(); });
+    .catch(function(e){ console.error('Wallet fetch error:', e); showFailed(); });
   }
 
-  // Countdown then fetch
-  function startCountdown(seconds) {
+  function startCountdown(secs) {
     var el = document.getElementById('ticketCountdown');
-    el.textContent = seconds;
+    el.textContent = secs;
     var t = setInterval(function(){
-      seconds--;
-      el.textContent = seconds;
-      if (seconds <= 0) {
-        clearInterval(t);
-        el.textContent = '…';
-        fetchWalletCard();
-      }
+      secs--;
+      el.textContent = secs > 0 ? secs : '…';
+      if (secs <= 0) { clearInterval(t); fetchCard(); }
     }, 1000);
   }
 
-  // On page load
-  if (isReturn) {
-    // Returning from email link — just fetch the ticket immediately (flow already ran)
+  if (!email) {
+    // No data — hide ticket section
+    document.getElementById('ticketSection').style.display = 'none';
+  } else if (isReturn) {
+    // Back from email — fetch immediately
     document.getElementById('ticketLoading').querySelector('p').textContent = 'Loading your ticket...';
     document.getElementById('ticketCountdown').textContent = '…';
-    if (email) {
-      fetchWalletCard();
-    } else {
-      showFailed();
-    }
-  } else if (firstName && email) {
-    // Fresh submission — fire webhook then wait for flow to complete
-    fetch('https://paymegpt.com/api/webhooks/flow/3350/1c7d5910428bdd760fb15a75e0184c7304d6c60709c9997947b0d4d85cab8fb3', {
+    fetchCard();
+  } else {
+    // Fresh RSVP — fire webhook then countdown
+    fetch(WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contactEmail: email,
-        contactName:  firstName + ' ' + lastName,
-        contactPhone: phone,
-        data: { firstName: firstName, lastName: lastName, partySize: partySize, specialRequests: specialReq, conf: conf }
+        contactEmail: email, contactName: firstName + ' ' + lastName, contactPhone: phone,
+        data: { firstName: firstName, lastName: lastName, partySize: partySize, specialRequests: specReq, conf: conf }
       })
     }).catch(function(e){ console.warn('Webhook:', e); });
-
-    // Start 8-second countdown then fetch the card
     startCountdown(8);
-
-  } else {
-    // No data (direct page visit) — hide ticket section
-    document.getElementById('ticketSection').style.display = 'none';
   }
 
   // Chat
   var chatLoaded = false;
   function openChat() {
-    var frame = document.getElementById('cp-chat-frame');
-    var iframe = document.getElementById('cp-chat-iframe');
+    var frame = document.getElementById('cp-chat-frame'), iframe = document.getElementById('cp-chat-iframe');
     if (!frame.classList.contains('open')) {
       if (!chatLoaded) { iframe.src = 'https://paymegpt.com/agents/53946577/embed'; chatLoaded = true; }
       frame.classList.add('open');
     } else { frame.classList.remove('open'); }
   }
   document.addEventListener('click', function(e) {
-    var frame  = document.getElementById('cp-chat-frame');
-    var bubble = document.getElementById('cp-chat-bubble');
+    var frame = document.getElementById('cp-chat-frame'), bubble = document.getElementById('cp-chat-bubble');
     if (!bubble.contains(e.target) && !frame.contains(e.target)) frame.classList.remove('open');
   });
 </script>
