@@ -1,44 +1,20 @@
-// Read URL params
-  const params = new URLSearchParams(window.location.search);
-  const name = params.get('name') || 'Friend';
-  const party = params.get('party') || '—';
-  const conf = params.get('conf') || 'CP-' + Math.floor(100000 + Math.random() * 900000);
+(function(){try{
+  var slug="lp-mpr44hcs-ll2p5";
+  var SK='lp_access_'+slug;
+  var map={access_token:'lp_pw_',allowlist_access_token:'lp_al_',pin_access_token:'lp_pin_',paywall_access_token:'lp_paid_'};
+  var u=new URL(location.href);var found=null;var changed=false;
+  Object.keys(map).forEach(function(p){var v=u.searchParams.get(p);if(v){found=v;try{localStorage.setItem(map[p]+slug,v);}catch(e){}u.searchParams.delete(p);changed=true;}});
+  if(found){try{sessionStorage.setItem(SK,found);}catch(e){}}
+  else{try{if(!sessionStorage.getItem(SK)){var t=localStorage.getItem('lp_pw_'+slug)||localStorage.getItem('lp_al_'+slug)||localStorage.getItem('lp_pin_'+slug)||localStorage.getItem('lp_paid_'+slug);if(t)sessionStorage.setItem(SK,t);}}catch(e){}}
+  if(changed){try{history.replaceState(null,'',u.toString());}catch(e){}}
 
-  document.getElementById('guestName').textContent = name + '!';
-  document.getElementById('confNumber').textContent = conf;
-  document.getElementById('confNameFull').textContent = name + ' — your reservation is confirmed';
-  document.getElementById('confParty').textContent = party + (party === '1' ? ' guest' : ' guests');
-
-  // Confetti
-  const colors = ['#C9A84C','#E8A0B0','#f36b83','#FAF8F5','#E8C97A','#c4607a'];
-  const wrap = document.getElementById('confettiWrap');
-  for (let i = 0; i < 80; i++) {
-    const el = document.createElement('div');
-    el.className = 'confetti-piece';
-    el.style.cssText = `
-      left: ${Math.random() * 100}%;
-      background: ${colors[Math.floor(Math.random() * colors.length)]};
-      width: ${4 + Math.random() * 8}px;
-      height: ${4 + Math.random() * 8}px;
-      animation-duration: ${2.5 + Math.random() * 3}s;
-      animation-delay: ${Math.random() * 2}s;
-      border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
-    `;
-    wrap.appendChild(el);
-  }
-
-  // Chat
-  let chatLoaded = false;
-  function openChat() {
-    const frame = document.getElementById('cp-chat-frame');
-    const iframe = document.getElementById('cp-chat-iframe');
-    if (!frame.classList.contains('open')) {
-      if (!chatLoaded) { iframe.src = 'https://paymegpt.com/agents/53946577/embed'; chatLoaded = true; }
-      frame.classList.add('open');
-    } else { frame.classList.remove('open'); }
-  }
-  document.addEventListener('click', function(e) {
-    const frame = document.getElementById('cp-chat-frame');
-    const bubble = document.getElementById('cp-chat-bubble');
-    if (!bubble.contains(e.target) && !frame.contains(e.target)) frame.classList.remove('open');
-  });
+  // Auto-attach gate token to:
+  //   1. sheet-rows writes (PATCH/POST/PUT/DELETE)
+  //   2. LLM proxy calls (POST/GET) — /api/landing-pages/public/<slug>/llm/...
+  //   3. landing-page LLM config probes (GET) — same prefix
+  // So AI-generated pages don't have to know about the X-Landing-Page-Token header.
+  function getTok(){try{return sessionStorage.getItem(SK)||localStorage.getItem('lp_pw_'+slug)||localStorage.getItem('lp_al_'+slug)||localStorage.getItem('lp_pin_'+slug)||localStorage.getItem('lp_paid_'+slug);}catch(e){return null;}}
+  function needsToken(url,method){if(!url)return false;var s=String(url);var m=(method||'GET').toUpperCase();var isSheetWrite=(m==='POST'||m==='PATCH'||m==='PUT'||m==='DELETE')&&/\/sheet-rows(\/|$|\?)/.test(s);var isLlm=/\/api\/landing-pages\/public\/[^/]+\/(llm|llm-config)(\/|$|\?)/.test(s);return isSheetWrite||isLlm;}
+  if(window.fetch){var _f=window.fetch;window.fetch=function(input,init){try{var url=typeof input==='string'?input:(input&&input.url)||'';var method=(init&&init.method)||(input&&input.method)||'GET';if(needsToken(url,method)){var tok=getTok();if(tok){init=init||{};var h=new Headers(init.headers||(typeof input!=='string'?input.headers:undefined)||{});if(!h.has('X-Landing-Page-Token'))h.set('X-Landing-Page-Token',tok);init.headers=h;}}}catch(e){}return _f.call(this,input,init);};}
+  if(window.XMLHttpRequest){var _o=XMLHttpRequest.prototype.open;var _s=XMLHttpRequest.prototype.send;XMLHttpRequest.prototype.open=function(m,u){this.__lpM=m;this.__lpU=u;return _o.apply(this,arguments);};XMLHttpRequest.prototype.send=function(){try{if(needsToken(this.__lpU,this.__lpM)){var tok=getTok();if(tok)this.setRequestHeader('X-Landing-Page-Token',tok);}}catch(e){}return _s.apply(this,arguments);};}
+}catch(e){}})();
