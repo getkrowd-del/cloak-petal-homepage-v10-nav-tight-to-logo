@@ -208,6 +208,17 @@
 <div class="nav-wrapper" data-section="navbar"><div class="nav-bottom"><a href="/" class="nav-logo-wrap"><img src="https://cloakandpetal.com/wp-content/uploads/2020/05/cloakandpetallogonew-removebg-preview.png" alt="Cloak &amp; Petal"></a></div></div>
 <div class="confetti-wrap" id="confettiWrap"></div>
 
+<div class="cancel-overlay" id="cancelOverlay">
+  <div class="cancel-box">
+    <h3>Cancel Reservation?</h3>
+    <p>Are you sure you want to cancel your spot at the <strong>Summer House Reunion</strong>? This will free up your seat for someone else. You can always RSVP again if you change your mind.</p>
+    <div class="cancel-actions">
+      <button class="btn-keep" onclick="closeCancelModal()">Keep My Spot</button>
+      <button class="btn-confirm-cancel" id="confirmCancelBtn" onclick="confirmCancel()">Yes, Cancel</button>
+    </div>
+  </div>
+</div>
+
 <section class="ty-hero" data-section="hero">
   <div class="hero-bg"><img src="https://krowdimg.b-cdn.net/clients/cloakpedal/reunion.png" alt="Summer House Reunion"></div>
   <div class="ty-content">
@@ -217,9 +228,10 @@
     <div class="ty-rule"></div>
     <p style="font-size:16px;line-height:1.85;color:rgba(250,248,245,0.8);margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;">Your spot at the <strong style="color:var(--white);">Summer House Reunion watch party</strong> is reserved. We'll see you June 2nd beneath the cherry blossoms! 🌸</p>
 
-    <div class="conf-card">
+    <div class="conf-card" id="confCard">
       <span class="conf-card-header">🎟️ &nbsp;Reservation Confirmation</span>
       <div class="conf-number" id="confNumber">CP------</div>
+      <button class="cancel-btn" id="cancelBtn" onclick="openCancelModal()">✕ Cancel Reservation</button>
       <div class="conf-divider"></div>
       <div class="conf-details">
         <div><span class="conf-detail-label">Event</span><div class="conf-detail-val">Summer House Reunion</div></div>
@@ -258,6 +270,12 @@
         <p>🔔 <strong>Reminder coming June 2nd</strong> at 10AM PST. Confirmation email is on its way!</p>
       </div>
     </div>
+
+    <div class="canceled-state" id="canceledState">
+      <div class="canceled-icon">🌸</div>
+      <h2>Reservation Canceled</h2>
+      <p>Your spot has been released. We hope to see you another time — and your wallet ticket has been voided. Stay magical! 💕</p>
+    </div>
   </div>
 </section>
 
@@ -287,9 +305,10 @@
 <div id="cp-chat-frame"><iframe id="cp-chat-iframe" src="" allow="microphone"></iframe></div>
 
 <script>
-  var WALLET_KEY = 'api_9856c03ec43ec6dfa2dacefc89634bf1db0e2d90528c9027d4bcd9efef0ce938';
-  var WALLET_URL = 'https://paymegpt.com/api/wallet/programs/187/cards';
-  var WEBHOOK    = 'https://paymegpt.com/api/webhooks/flow/3350/1c7d5910428bdd760fb15a75e0184c7304d6c60709c9997947b0d4d85cab8fb3';
+  var WALLET_KEY  = 'api_9856c03ec43ec6dfa2dacefc89634bf1db0e2d90528c9027d4bcd9efef0ce938';
+  var WALLET_URL  = 'https://paymegpt.com/api/wallet/programs/187/cards';
+  var WEBHOOK     = 'https://paymegpt.com/api/webhooks/flow/3350/1c7d5910428bdd760fb15a75e0184c7304d6c60709c9997947b0d4d85cab8fb3';
+  var CANCEL_HOOK = 'https://paymegpt.com/api/webhooks/flow/w45ek9zd/83af2119347888c611736746f22887ec557fa1c0370900726153e6ab52b52b4f';
 
   var params    = new URLSearchParams(window.location.search);
   var firstName = params.get('firstName') || params.get('name') || '';
@@ -357,15 +376,12 @@
   }
 
   if (!email) {
-    // No data — hide ticket section
     document.getElementById('ticketSection').style.display = 'none';
   } else if (isReturn) {
-    // Back from email — fetch immediately
     document.getElementById('ticketLoading').querySelector('p').textContent = 'Loading your ticket...';
     document.getElementById('ticketCountdown').textContent = '…';
     fetchCard();
   } else {
-    // Fresh RSVP — fire webhook then countdown
     fetch(WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -376,6 +392,43 @@
     }).catch(function(e){ console.warn('Webhook:', e); });
     startCountdown(8);
   }
+
+  // ── CANCEL RESERVATION ──
+  function openCancelModal(){ document.getElementById('cancelOverlay').classList.add('open'); }
+  function closeCancelModal(){ document.getElementById('cancelOverlay').classList.remove('open'); }
+
+  function confirmCancel(){
+    var btn = document.getElementById('confirmCancelBtn');
+    btn.disabled = true; btn.textContent = 'Canceling...';
+    fetch(CANCEL_HOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contactEmail: email, contactName: (firstName + ' ' + lastName).trim(), contactPhone: phone,
+        data: { conf: conf, current_date: new Date().toLocaleDateString() }
+      })
+    })
+    .then(function(){
+      // Hide everything, show canceled state
+      closeCancelModal();
+      document.getElementById('confCard').style.display = 'none';
+      document.getElementById('canceledState').style.display = 'block';
+      document.querySelector('.ty-badge').style.display = 'none';
+      document.querySelector('.ty-title').style.display = 'none';
+      document.querySelector('.ty-rule').style.display = 'none';
+      document.querySelector('.check-circle').textContent = '✕';
+      document.querySelector('.check-circle').style.background = 'linear-gradient(135deg,#f87171,#c4607a)';
+    })
+    .catch(function(e){
+      btn.disabled = false; btn.textContent = 'Yes, Cancel';
+      alert('Could not cancel. Please try again or contact us directly.');
+      console.error(e);
+    });
+  }
+
+  document.getElementById('cancelOverlay').addEventListener('click', function(e){
+    if (e.target === this) closeCancelModal();
+  });
 
   // Chat
   var chatLoaded = false;
