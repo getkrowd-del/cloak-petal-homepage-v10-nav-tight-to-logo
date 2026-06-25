@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://cloak.getkrowd.com/press/</loc>
+    <lastmod>2026-06-25T18:32:10.561Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://cloak.getkrowd.com/contact-us/</loc>
     <lastmod>2026-06-25T18:32:04.457Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -18,11 +23,6 @@
   <url>
     <loc>https://cloak.getkrowd.com/</loc>
     <lastmod>2026-06-25T18:31:46.099Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://cloak.getkrowd.com/press/</loc>
-    <lastmod>2026-05-31T20:59:20.327Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
