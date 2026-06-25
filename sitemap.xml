@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://cloak.getkrowd.com/summer-house-reunion-thank-you/</loc>
+    <lastmod>2026-06-25T18:32:26.211Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://cloak.getkrowd.com/summer-house-reunion/</loc>
     <lastmod>2026-06-25T18:32:21.277Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -33,11 +38,6 @@
   <url>
     <loc>https://cloak.getkrowd.com/</loc>
     <lastmod>2026-06-25T18:31:46.099Z</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://cloak.getkrowd.com/summer-house-reunion-thank-you/</loc>
-    <lastmod>2026-05-31T20:46:33.138Z</lastmod>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>
